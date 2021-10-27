@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AlterProfile extends Migration
+class AlterGalleries extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class AlterProfile extends Migration
      */
     public function up()
     {
-        Schema::table('profiles', function (Blueprint $table) {
+        Schema::table('galleries', function (Blueprint $table) {
             $table->timestamps();
             $table->bigInteger('dinas_id')->unsigned();
             $table->foreign('dinas_id')->references('id')->on('dinas');

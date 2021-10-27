@@ -13,4 +13,8 @@ class Gallery extends Model
     public $timestamps = false;
     protected $fillable = [
         'file', 'title', 'keterangan'];
+    public function dinas()
+    {
+        return $this->belongsTo('App\Models\Dinas');
+    }
 }

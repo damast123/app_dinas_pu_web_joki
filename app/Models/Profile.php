@@ -17,4 +17,8 @@ class Profile extends Model
         'tugas_pokok',
         'fungsi'
     ];
+    public function dinas()
+    {
+        return $this->belongsTo('App\Models\Dinas');
+    }
 }

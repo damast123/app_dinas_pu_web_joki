@@ -15,4 +15,8 @@ class Jabatan extends Model
     protected $fillable   = [
         'nama_jabatan'
     ];
+    public function dinas()
+    {
+        return $this->hasOne('App\Models\Dinas');
+    }
 }

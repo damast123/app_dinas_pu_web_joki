@@ -59,7 +59,7 @@
             <div class="row content">
               <div class="col-lg-12" data-aos="fade-right">
                 <h2>Dinas Pekerjaan Umum Sumber Daya Air</h2>
-                {!! $data['informasi_pu'][0]['informasi_pu'] !!}
+                {!! $data['informasi_pu']['informasi_pu'] !!}
               </div>
 
             </div>

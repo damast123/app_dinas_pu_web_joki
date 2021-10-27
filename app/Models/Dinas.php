@@ -31,4 +31,34 @@ class Dinas extends Authenticable
     {
         return $this->belongsTo('App\Models\Role');
     }
+
+    public function perintah()
+    {
+        return $this->hasOne('App\Models\Perintah');
+    }
+
+    public function berita()
+    {
+        return $this->hasMany('App\Models\Berita');
+    }
+
+    public function agenda()
+    {
+        return $this->hasMany('App\Models\Agenda');
+    }
+
+    public function gallery()
+    {
+        return $this->hasMany('App\Models\Gallery');
+    }
+
+    public function profile()
+    {
+        return $this->hasMany('App\Models\Profile');
+    }
+
+    public function pengaduan()
+    {
+        return $this->hasMany('App\Models\Pengaduan');
+    }
 }

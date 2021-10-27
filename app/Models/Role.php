@@ -15,4 +15,8 @@ class Role extends Model
     protected $fillable   = [
         'nama_role'
     ];
+    public function dinas()
+    {
+        return $this->hasOne('App\Models\Dinas');
+    }
 }

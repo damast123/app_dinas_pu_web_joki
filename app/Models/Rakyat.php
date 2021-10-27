@@ -21,4 +21,9 @@ class Rakyat extends Authenticable
     ];
 
     protected $hidden = ['password'];
+
+    public function pengaduan()
+    {
+        return $this->hasMany('App\Models\Pengaduan');
+    }
 }

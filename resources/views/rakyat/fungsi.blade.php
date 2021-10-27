@@ -59,7 +59,7 @@
         <div class="row content">
           <div class="col-lg-12" data-aos="fade-right">
             <h2>Fungsi</h2>
-            {!! $data['fungsi'][0]['fungsi'] !!}
+            {!! $data['fungsi']['fungsi'] !!}
           </div>
 
         </div>

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Gallery;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 
 class GalleryController extends Controller
@@ -56,6 +58,7 @@ class GalleryController extends Controller
                 'error'  => $validation->errors()
             ];
         } else {
+            $id = Auth::guard('admin')->user()->id;
             $file = $request->file('gambar');
 
             if($file==null)
@@ -71,6 +74,9 @@ class GalleryController extends Controller
                 'title'  => $request->title,
                 'file'      => $nama_file,
                 'keterangan'  => $request->keterangan,
+                'dinas_id' => $id,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
             ]);
 
             if($query) {

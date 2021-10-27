@@ -13,4 +13,9 @@ class KategoriPengaduan extends Model
     public $timestamps = false;
     protected $fillable = [
         'nama'];
+
+    public function pengaduan()
+    {
+        return $this->hasOne('App\Models\Pengaduan');
+    }
 }

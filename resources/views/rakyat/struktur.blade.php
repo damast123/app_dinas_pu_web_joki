@@ -67,7 +67,7 @@
           <div class="col-lg-12 col-md-12 d-flex align-items-stretch">
             <div class="member" data-aos="fade-up">
               <div class="member-img">
-                <img src="{{url('/profile/'.$struktur[0]['struktur_organisasi'])}}" class="img-fluid" alt="">
+                <img src="{{url('/profile/'.$struktur['struktur_organisasi'])}}" class="img-fluid" alt="">
 
               </div>
 

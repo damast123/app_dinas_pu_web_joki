@@ -6,6 +6,7 @@ use App\Models\Profile;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ProfileController extends Controller
@@ -22,7 +23,7 @@ class ProfileController extends Controller
 
     public function about()
     {
-        $about = Profile::all();
+        $about = Profile::all()->last();
 
         $data = [
             'content'  => 'rakyat.about',
@@ -34,7 +35,7 @@ class ProfileController extends Controller
 
     public function struktureorganisasi()
     {
-        $struktur = Profile::all();
+        $struktur = Profile::all()->last();
 
         $data = [
             'content'  => 'rakyat.struktur',
@@ -46,7 +47,7 @@ class ProfileController extends Controller
 
     public function visimisi()
     {
-        $visimisi = Profile::all();
+        $visimisi = Profile::all()->last();
 
         $data = [
             'content'  => 'rakyat.visimisi',
@@ -58,7 +59,7 @@ class ProfileController extends Controller
 
     public function tugaspokok()
     {
-        $tugaspokok = Profile::all();
+        $tugaspokok = Profile::all()->last();
 
         $data = [
             'content'  => 'rakyat.tugas',
@@ -71,7 +72,7 @@ class ProfileController extends Controller
 
     public function fungsi()
     {
-        $fungsi = Profile::all();
+        $fungsi = Profile::all()->last();
 
         $data = [
             'content'  => 'rakyat.fungsi',
@@ -96,24 +97,28 @@ class ProfileController extends Controller
     public function update(Request $request, Profile $profile)
     {
         $file = $request->file('gambar');
+        $id = Auth::guard('admin')->user()->id;
+
         if($file==null)
         {
             $nama_file = "";
         }
         else
         {
-            $nama_file = "1.png";
+            $nama_file = time()."_".$file->getClientOriginalName();
         }
 
 
         $query = DB::table('profiles')
-        ->update([
+        ->insert([
             'informasi_pu'  => $request->informasipu,
             'visi'      => $request->misi,
             'misi'  => $request->visi,
             'struktur_organisasi'  => $nama_file,
             'tugas_pokok'      => $request->tugas,
             'fungsi'  => $request->fungsi,
+            'dinas_id' => $id,
+            'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
 
