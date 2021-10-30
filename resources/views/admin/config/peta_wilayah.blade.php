@@ -152,7 +152,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: function(response) {
-                $('#preview_gambar').attr('src', "{{ url('/profile/') }}".response.gambar);
+                $('#preview_gambar').attr('src', "{{ url('/petawilayahgambar/') }}".response.gambar);
                 $('#download_doc').attr('href', '');
             },
             error: function() {

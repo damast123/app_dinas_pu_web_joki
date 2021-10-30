@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dinas;
 use App\Models\Profile;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
@@ -87,6 +88,39 @@ class ProfileController extends Controller
     public function indexadmin()
     {
         $profile = Profile::all();
+
+        foreach($profile as $val)
+        {
+            $dinas = Dinas::select('*')
+            ->where('id',$val->dinas_id)
+            ->get();
+
+        }
+
+        $data = [
+            'content' => 'admin.config.view_profile_data',
+            'profile' => $profile,
+            'dinas' => $dinas,
+        ];
+        return view('admin.layout.index', ['data' => $data]);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Profile  $profile
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Request $request)
+    {
+        $profile = Profile::find($request->id);
+
+        return response()->json($profile);
+    }
+
+    public function edit()
+    {
+        $profile = Profile::all()->last();
         $data = [
             'content' => 'admin.config.ganti_profile_perusahaan',
             'profile' => $profile,

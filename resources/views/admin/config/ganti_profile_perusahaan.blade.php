@@ -38,40 +38,40 @@
 
                             <div class="form-group">
                                 <label class="font-weight-bold">Informasi PU</label>
-                                <textarea class="form-control" name="informasipu" rows="5" placeholder="Masukkan Informasi PU">{{ $profile[0]['informasi_pu'] }}</textarea>
+                                <textarea class="form-control" name="informasipu" rows="5" placeholder="Masukkan Informasi PU">{{ $profile['informasi_pu'] }}</textarea>
                             </div>
 
                             <div class="form-group">
                                 <label class="font-weight-bold">Visi</label>
-                                <textarea class="form-control" name="visi" rows="5" placeholder="Masukkan Visi">{{ $profile[0]['visi'] }}</textarea>
+                                <textarea class="form-control" name="visi" rows="5" placeholder="Masukkan Visi">{{ $profile['visi'] }}</textarea>
                             </div>
 
                             <div class="form-group">
                                 <label class="font-weight-bold">Misi</label>
-                                <textarea class="form-control" name="misi" rows="5" placeholder="Masukkan Misi">{{ $profile[0]['misi'] }}</textarea>
+                                <textarea class="form-control" name="misi" rows="5" placeholder="Masukkan Misi">{{ $profile['misi'] }}</textarea>
                             </div>
 
-                            @if ($profile[0]['struktur_organisasi']==null)
+                            @if ($profile['struktur_organisasi']==null)
                                 <img width="250px" height="250px" src="https://bitsofco.de/content/images/2018/12/broken-1.png">
                             @else
-                                <a href="{{ url('/profile/'.$profile[0]['struktur_organisasi']) }}"><img width="250px" height="250px" src="{{ url('/profile/'.$profile[0]['struktur_organisasi']) }}"></a>
+                                <a href="{{ url('/profile/'.$profile['struktur_organisasi']) }}"><img width="250px" height="250px" src="{{ url('/profile/'.$profile['struktur_organisasi']) }}"></a>
                             @endif
                             <div class="form-group">
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" name="gambar" id="gambar" value="{{$profile[0]->struktur_organisasi}}">
+                                    <input type="file" class="custom-file-input" name="gambar" id="gambar" value="{{$profile->struktur_organisasi}}">
                                     <label class="custom-file-label" for="gambar">Pilih gambar</label>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="font-weight-bold">Fungsi</label>
-                                <textarea class="form-control" name="fungsi" rows="5" placeholder="Masukkan Konten Fungsi">{{ $profile[0]['fungsi'] }}</textarea>
+                                <textarea class="form-control" name="fungsi" rows="5" placeholder="Masukkan Konten Fungsi">{{ $profile['fungsi'] }}</textarea>
 
                             </div>
 
                             <div class="form-group">
                                 <label class="font-weight-bold">Tugas Pokok</label>
-                                <textarea class="form-control" name="tugas" rows="5" placeholder="Masukkan Konten Tugas Pokok">{{ $profile[0]['tugas_pokok'] }}</textarea>
+                                <textarea class="form-control" name="tugas" rows="5" placeholder="Masukkan Konten Tugas Pokok">{{ $profile['tugas_pokok'] }}</textarea>
 
                             </div>
 

@@ -45,6 +45,8 @@ Route::get('/admin_pu/gallery',[GalleryController::class,'indexadmin']);
 Route::post('/admin_pu/gallery/add',[GalleryController::class,'store']);
 
 Route::get('/admin_pu/ganti_profile_perusahaan',[ProfileController::class,'indexadmin']);
+Route::post('admin_pu/ganti_profile_perusahaan/show',[ProfileController::class,'show']);
+Route::get('/admin_pu/ganti_profile_perusahaan/edit',[ProfileController::class,'edit']);
 Route::post('/admin_pu/ganti_profile_perusahaan/change',[ProfileController::class,'update']);
 
 Route::get('/admin_pu/agenda',[AgendaController::class,'indexadmin']);
