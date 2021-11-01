@@ -35,7 +35,7 @@
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
-                            <div class="col-lg-6"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTroRSopuLdPJkp6l-KObxWv5vix0SeSRJnFQ&usqp=CAU" alt=""></div>
+                            <div class="col-lg-6"><img src="https://upload.wikimedia.org/wikipedia/commons/b/b9/Lambang_Kabupaten_Sumenep.png" alt=""></div>
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">

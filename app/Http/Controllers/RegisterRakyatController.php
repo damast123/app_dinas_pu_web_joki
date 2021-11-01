@@ -2,34 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\Dinas;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Rakyat;
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
 
-use App\Models\Jabatan;
-use App\Models\Role;
-
-use Illuminate\Http\Request;
-
-class RegisterController extends Controller
+class RegisterRakyatController extends Controller
 {
     public function __construct()
     {
         $this->middleware('guest');
-        $this->middleware('guest:admin');
+        $this->middleware('guest:masyarakat');
     }
-    public function showAdminRegisterForm()
+
+    public function showRakyatRegisterForm()
     {
-        $role = Role::all();
-        $jabatan = Jabatan::all();
-
-        return view('admin.register')->with('role',$role)->with('jabatan',$jabatan);
+        return view('rakyat.register');
     }
 
-    protected function createAdmin(Request $request)
+    protected function createRakyat(Request $request)
     {
         $rules = [
             'name'                  => 'required|min:3|max:35',
@@ -54,25 +48,22 @@ class RegisterController extends Controller
             return redirect()->back()->withErrors($validator)->withInput($request->all);
         }
 
-        $user = new Dinas;
+        $user = new Rakyat;
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->email_verified_at = \Carbon\Carbon::now();
         $user->alamat = $request->alamat;
-        $user->tanggal_lahir = $request->tanggal_lahir;
-        $user->tempat_lahir = $request->tempat_lahir;
-        $user->jabatan_id = $request->jabatan;
-        $user->role_id = $request->role;
+        $user->jenis_kelamin = $request->jenis_kelamin;
+        $user->no_telp = $request->no_telp;
         $simpan = $user->save();
 
         if($simpan){
             Session::flash('success', 'Register berhasil! Silahkan login untuk mengakses data');
-            return redirect()->route('login_admin');
+            return redirect()->route('login_rakyat');
         } else {
             Session::flash('errors', ['' => 'Register gagal! Silahkan ulangi beberapa saat lagi']);
-            return redirect()->route('register_admin');
+            return redirect()->route('register');
         }
     }
-
 }

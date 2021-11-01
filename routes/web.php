@@ -14,6 +14,7 @@ use App\Http\Controllers\LoginRakyatController;
 use App\Http\Controllers\PengaduanController;
 use App\Http\Controllers\PetaWilayahController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\RegisterRakyatController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PerintahController;
 use App\Http\Controllers\SendMailController;
@@ -125,9 +126,9 @@ Route::post('/create_pengaduan/store', [PengaduanController::class,'store']);
 
 Route::get('/check_pengaduan', [LoginRakyatController::class,'showRakyatLoginForm'])->name('login_rakyat');
 Route::get('/rakyat/login', [LoginRakyatController::class,'showRakyatLoginForm'])->name('login_rakyat');
-Route::get('/rakyat/register', [RegisterController::class,'showRakyatRegisterForm'])->name('register_rakyat');
+Route::get('/rakyat/register', [RegisterRakyatController::class,'showRakyatRegisterForm'])->name('register_rakyat');
 Route::post('/rakyat/login', [LoginRakyatController::class,'rakyatLogin']);
-Route::post('/rakyat/register', [RegisterController::class,'createRakyat']);
+Route::post('/rakyat/register', [RegisterRakyatController::class,'createRakyat']);
 
 Route::get('/gallery/rakyat',[GalleryController::class,'index']);
 Route::get('/berita', [BeritaController::class,'index']);

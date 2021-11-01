@@ -60,7 +60,8 @@
   <section id="contact" class="contact">
 
       <div id="logo">
-        <img src="{{asset('assets/img/blog/blog-1.jpg')}}" class="img-fluid" alt="">
+        {{-- <img src="{{asset('assets/img/blog/blog-1.jpg')}}" class="img-fluid" alt=""> --}}
+        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b9/Lambang_Kabupaten_Sumenep.png" class="img-fluid" alt="">
 
       </div>
     <div class="container">

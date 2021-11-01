@@ -30,7 +30,7 @@
             <div class="card-body p-0">
                 <!-- Nested Row within Card Body -->
                 <div class="row">
-                    <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                    <div class="col-lg-5 d-none d-lg-block"><img src="https://upload.wikimedia.org/wikipedia/commons/b/b9/Lambang_Kabupaten_Sumenep.png" alt=""></div>
                     <div class="col-lg-7">
                         <div class="p-5">
                             <div class="text-center">
@@ -70,7 +70,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control form-control-user" id="no_telp"
+                                    <input type="text" class="form-control form-control-user" maxlength="14" id="no_telp"
                                         name="no_telp" placeholder="No Telp">
                                 </div>
                                 <div class="form-group">
