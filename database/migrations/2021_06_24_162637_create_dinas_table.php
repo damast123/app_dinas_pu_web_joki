@@ -13,7 +13,7 @@ class CreateDinasTable extends Migration
      */
     public function up()
     {
-        Schema::create('dinas', function (Blueprint $table) {
+        Schema::create('pegawai_dinas', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->text('alamat')->nullable();

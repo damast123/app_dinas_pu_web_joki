@@ -15,8 +15,8 @@ class AlterProfile extends Migration
     {
         Schema::table('profiles', function (Blueprint $table) {
             $table->timestamps();
-            $table->bigInteger('dinas_id')->unsigned();
-            $table->foreign('dinas_id')->references('id')->on('dinas');
+            $table->bigInteger('pegawai_dinas_id')->unsigned();
+            $table->foreign('pegawai_dinas_id')->references('id')->on('pegawai_dinas');
         });
     }
 

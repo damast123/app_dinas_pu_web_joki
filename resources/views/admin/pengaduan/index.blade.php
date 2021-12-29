@@ -103,7 +103,7 @@
     <div class="modal-dialog modal-lg modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Edit Pengaduan</h5>
+                <h5 class="modal-title">Pengaduan</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                 </button>
@@ -154,8 +154,6 @@
                             <label>Status Pengaduan :</label>
                             <select name="status_pengaduan" id="status_pengaduan_edit">
                                 <option value="">--Pilih Status Pengaduan --</option>
-                                <option value="1">Proses</option>
-                                <option value="2">Selesai</option>
                                 <option value="3">Tidak di acc</option>
                             </select>
                         </div>
@@ -205,7 +203,7 @@
                 console.log(response);
                 if(response.jenis_pengaduan=='pengaduan')
                 {
-                    if (response.status_pengaduan==0||response.status_pengaduan==1) {
+                    if (response.status_pengaduan==0) {
                         $('#hide_select').css('display','block');
                     }
                     else
@@ -214,7 +212,12 @@
                         $('#btn_cancel').hide();
                         $('#text_status').css('display','block');
                         $('#hide_select').css('display','none');
-                        if(response.status_pengaduan==2)
+                        if(response.status_pengaduan==1)
+                        {
+
+                            $('#hasil_status').val("Proses");
+                        }
+                        else if(response.status_pengaduan==2)
                         {
 
                             $('#hasil_status').val("Selesai");

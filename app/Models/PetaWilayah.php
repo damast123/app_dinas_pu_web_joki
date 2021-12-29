@@ -12,7 +12,7 @@ class PetaWilayah extends Model
     protected $primaryKey = 'id';
     public $timestamps = false;
     protected $fillable = [
-        'file', 'gambar', 'dinas_id'];
+        'file', 'gambar', 'pegawai_dinas_id'];
 
     public function dinas()
     {

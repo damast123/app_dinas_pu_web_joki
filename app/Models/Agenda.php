@@ -12,7 +12,7 @@ class Agenda extends Model
     protected $primaryKey = 'id';
     public $timestamps = false;
     protected $fillable = [
-        'nama_event', 'tanggal_mulai', 'tanggal_akhir', 'jam', 'isi_event', 'tempat_event', 'dinas_id'];
+        'nama_event', 'tanggal_mulai', 'tanggal_akhir', 'jam', 'isi_event', 'tempat_event', 'pegawai_dinas_id'];
 
 
     public function dinas()

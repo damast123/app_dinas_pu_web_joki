@@ -14,8 +14,8 @@ class AlterPetaWilayah extends Migration
     public function up()
     {
         Schema::table('peta_wilayahs', function (Blueprint $table) {
-            $table->bigInteger('dinas_id')->unsigned();
-            $table->foreign('dinas_id')->references('id')->on('dinas');
+            $table->bigInteger('pegawai_dinas_id')->unsigned();
+            $table->foreign('pegawai_dinas_id')->references('id')->on('pegawai_dinas');
         });
     }
 

@@ -12,7 +12,7 @@ class Berita extends Model
     protected $primaryKey = 'id';
     public $timestamps = false;
     protected $fillable = [
-        'tanggal_berita', 'tanggal_muat', 'judul_berita', 'isi_berita', 'gambar_berita', 'dinas_id'];
+        'tanggal_berita', 'tanggal_muat', 'judul_berita', 'isi_berita', 'gambar_berita', 'pegawai_dinas_id'];
 
 
     public function dinas()

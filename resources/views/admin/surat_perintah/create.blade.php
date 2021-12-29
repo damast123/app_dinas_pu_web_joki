@@ -83,11 +83,21 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="katpengaduan">Dinas Tujuan</label>
+                                <label for="dinas_tujuan">Pegawai Dinas Tujuan</label>
                                 <select class="form-control" id="dinas_tujuan" name="dinas_tujuan">
                                     <option value="">--Pilih--</option>
                                     @foreach($dinas as $d)
                                         <option value="{{ $d->id }}">{{ $d->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="pengaduan_assign">Pengaduan</label>
+                                <select class="form-control" id="pengaduan_assign" name="pengaduan_assign">
+                                    <option value="">--Pilih--</option>
+                                    @foreach($pengaduan as $p)
+                                        <option value="{{ $p->id }}">{{ $p->judul_pengaduan }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -103,7 +113,7 @@
 
                             <div class="form-group text-center">
                                 <button class="btn btn-success btn-submit">Save</button>
-                            </>
+
                         </form>
                     </div>
                 </div>

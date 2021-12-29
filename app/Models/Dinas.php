@@ -12,7 +12,7 @@ class Dinas extends Authenticable
 {
     use Notifiable,HasFactory;
 
-    protected $table      = 'dinas';
+    protected $table      = 'pegawai_dinas';
     protected $primaryKey = 'id';
     protected $guard = 'admin';
 

@@ -74,7 +74,7 @@ class GalleryController extends Controller
                 'title'  => $request->title,
                 'file'      => $nama_file,
                 'keterangan'  => $request->keterangan,
-                'dinas_id' => $id,
+                'pegawai_dinas_id' => $id,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ]);

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dinas;
+use App\Models\Pengaduan;
 use App\Models\Perintah;
+use App\Models\Rakyat;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -16,17 +18,18 @@ class PerintahController extends Controller
     {
         $id = Auth::guard('admin')->user()->id;
         $surat_perintah = Perintah::select('*')
-        ->where('dinas_pembuat',$id)
-        ->orWhere('dinas_tujuan',$id)
+        ->where('pegawai_dinas_pembuat',$id)
+        ->orWhere('pegawai_dinas_tujuan',$id)
         ->get();
-
+        $dinas_pembuat=[];
+        $dinas_tujuan=[];
         foreach($surat_perintah as $val)
         {
             $dinas_pembuat = Dinas::select('*')
-            ->where('id',$val->dinas_pembuat)
+            ->where('id',$val->pegawai_dinas_pembuat)
             ->get();
             $dinas_tujuan = Dinas::select('*')
-            ->where('id',$val->dinas_tujuan)
+            ->where('id',$val->pegawai_dinas_tujuan)
             ->get();
         }
 
@@ -34,8 +37,8 @@ class PerintahController extends Controller
         $data = [
             'content'  => 'admin.surat_perintah.index',
             'surat_perintah' => $surat_perintah,
-            'dinas_pembuat' => $dinas_pembuat,
-            'dinas_tujuan' => $dinas_tujuan
+            'pegawai_dinas_pembuat' => $dinas_pembuat,
+            'pegawai_dinas_tujuan' => $dinas_tujuan
         ];
         return view('admin.layout.index', ['data' => $data]);
     }
@@ -44,9 +47,13 @@ class PerintahController extends Controller
     {
         $id = Auth::guard('admin')->user()->id;
         $dinas = Dinas::where('id','!=',$id)->get();
+
+        $pengaduan = Pengaduan::where('perintah_id',null)->where('jenis_pengaduan','pengaduan')->get();
+
         $data = [
             'content'  => 'admin.surat_perintah.create',
-            'dinas'    => $dinas
+            'dinas'    => $dinas,
+            'pengaduan'=> $pengaduan,
         ];
         return view('admin.layout.index', ['data' => $data]);
     }
@@ -60,6 +67,7 @@ class PerintahController extends Controller
             'pesan' => 'required',
             'lokasi' => 'required',
             'status_laporan' => 'required',
+            'pengaduan_assign' => 'required',
             'dinas_tujuan' => 'required',
         ], [
             'no_surat_perintah.required' => 'No Surat Perintah Tidak Boleh Kosong',
@@ -67,7 +75,9 @@ class PerintahController extends Controller
             'pesan.required' => 'Pesan Tidak Boleh Kosong',
             'lokasi.required' => 'Lokasi Tidak Boleh Kosong',
             'status_laporan.required' => 'Status Laporan Tidak Boleh Kosong',
+            'pengaduan_assign.required' => 'Pengaduan Tidak Boleh Kosong',
             'dinas_tujuan.required' => 'Dinas Tujuan Tidak Boleh Kosong',
+
         ]);
         $file = $request->file('file_doc');
         $gambar = $request->file('gambar');
@@ -96,12 +106,16 @@ class PerintahController extends Controller
             'status'            => $request->status_laporan,
             'gambar'            => $nama_gambar,
             'file'              => $nama_file,
-            'dinas_pembuat'     => $id,
-            'dinas_tujuan'      => $request->dinas_tujuan,
+            'pegawai_dinas_pembuat'     => $id,
+            'pegawai_dinas_tujuan'      => $request->dinas_tujuan,
         ]);
         if($add_perintah)
         {
-            $emailDinasTujuan = Dinas::where('id',$request->dinas_tujuan)->get();
+            Pengaduan::where('id',$request->pengaduan_assign)
+            ->update([
+                'status_pengaduan'      => '1',
+            ]);
+            $emailDinasTujuan = Dinas::where('id',$request->pegawai_dinas_tujuan)->get();
             $details = [
                 'title' => 'Ada surat perintah',
                 'body' => 'Ini ada surat perintah dengan no: '.$request->no_surat_perintah.'. Silahkan cek di web'
@@ -109,6 +123,21 @@ class PerintahController extends Controller
 
             try {
                 Mail::to($emailDinasTujuan[0]['email'])->send(new \App\Mail\MyMail($details));
+            } catch(\Exception $e){
+                echo "Email gagal dikirim karena $e.";
+            }
+
+            $get_id_rakyat = Pengaduan::find($request->pengaduan_assign);
+
+            $get_email = Rakyat::find($get_id_rakyat->rakyat_id);
+
+            $detailsPengaduan = [
+                'title' => 'Update status pengaduan ',
+                'body' => 'Status pengaduan anda dengan judul '.$get_id_rakyat->judul_pengaduan.' sudah di update. Sekarang status pengaduan sedang di proses.'
+            ];
+
+            try {
+                Mail::to($get_email->email)->send(new \App\Mail\UpdatePengaduan($detailsPengaduan));
             } catch(\Exception $e){
                 echo "Email gagal dikirim karena $e.";
             }
@@ -189,16 +218,50 @@ class PerintahController extends Controller
         }
 
         $arr_merge = array_merge($arr,$getNamaFile,$getNamaGambar,);
-        // dd($arr_merge);
+
         $update_perintah = Perintah::findOrFail($request->id_edit)
             ->update($arr_merge);
 
-        $get_email_pembuat = Dinas::find($request->dinas_pembuat);
+        $get_email_pembuat = Dinas::find($request->pegawai_dinas_pembuat);
 
-        $get_email_tujuan = Dinas::find($request->dinas_tujuan);
+        $get_email_tujuan = Dinas::find($request->pegawai_dinas_tujuan);
 
         if($update_perintah)
         {
+            $get_id_rakyat = Pengaduan::select('*')->where('perintah_id',$request->id_edit)->get();
+            $get_email = Rakyat::find($get_id_rakyat->rakyat_id);
+
+            if($request->status_laporan_edit=="1")
+            {
+                Pengaduan::where('id',$get_id_rakyat->perintah_id)
+                ->update([
+                    'status_pengaduan'      => '2',
+                ]);
+
+                $detailsPengaduan = [
+                    'title' => 'Update status pengaduan ',
+                    'body' => 'Status pengaduan anda sudah di update. Pengaduan anda sudah selesai diproses.'
+                ];
+            }
+            else
+            {
+                Pengaduan::where('id',$get_id_rakyat->perintah_id)
+                ->update([
+                    'status_pengaduan'      => '3',
+                ]);
+
+                $detailsPengaduan = [
+                    'title' => 'Update status pengaduan ',
+                    'body' => 'Status pengaduan anda sudah di update. Namun mohon maaf tapi pengaduan anda dibatalkan.'
+                ];
+            }
+
+            try {
+                Mail::to($get_email->email)->send(new \App\Mail\UpdatePengaduan($detailsPengaduan));
+            } catch(\Exception $e){
+                echo "Email gagal dikirim karena $e.";
+            }
+
             if($file!=null)
             {
                 $tujuan_upload = 'doc_surat_perintah';

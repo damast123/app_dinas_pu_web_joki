@@ -81,7 +81,7 @@ class AgendaController extends Controller
             'jam'      => $request->jam,
             'isi_event'  => $request->isi_event,
             'tempat_event' => $request->tempat_event,
-            'dinas_id' => $id,
+            'pegawai_dinas_id' => $id,
         ]);
         if($add_agenda)
         {

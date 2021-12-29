@@ -12,7 +12,7 @@ class Pengaduan extends Model
     protected $primaryKey = 'id';
     public $timestamps = false;
     protected $fillable = [
-        'tanggal_pengaduan', 'isi_pengaduan', 'file', 'gambar', 'status_pengaduan', 'judul_pengaduan', 'tanggal_kejadian', 'lokasi_pengaduan', 'jenis_pengaduan', 'dinas_id', 'rakyat_id', 'kategori_pengaduan_id'];
+        'tanggal_pengaduan', 'isi_pengaduan', 'file', 'gambar', 'status_pengaduan', 'judul_pengaduan', 'tanggal_kejadian', 'lokasi_pengaduan', 'jenis_pengaduan', 'pegawai_dinas_id', 'rakyat_id', 'kategori_pengaduan_id'];
 
     public function dinas()
     {

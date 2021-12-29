@@ -33,8 +33,8 @@
                     <thead>
                         <tr>
                             <th>No Surat Perintah</th>
-                            <th>Dinas Pembuat</th>
-                            <th>Dinas Tujuan</th>
+                            <th>Pegawai Dinas Pembuat</th>
+                            <th>Pegawai Dinas Tujuan</th>
                             <th>File</th>
                             <th>Gambar</th>
                             <th>Status</th>
@@ -44,8 +44,8 @@
                     <tfoot>
                         <tr>
                             <th>No Surat Perintah</th>
-                            <th>Dinas Pembuat</th>
-                            <th>Dinas Tujuan</th>
+                            <th>Pegawai Dinas Pembuat</th>
+                            <th>Pegawai Dinas Tujuan</th>
                             <th>File</th>
                             <th>Gambar</th>
                             <th>Status</th>
@@ -56,8 +56,8 @@
                         @foreach ($surat_perintah as $key => $sp)
                             <tr>
                                 <td>{{$sp->no_surat_perintah}}</td>
-                                <td>{{$dinas_pembuat[$key]->name}}</td>
-                                <td>{{$dinas_tujuan[$key]->name}}</td>
+                                <td>{{$pegawai_dinas_pembuat[$key]->name}}</td>
+                                <td>{{$pegawai_dinas_tujuan[$key]->name}}</td>
                                 @if (file_exists(public_path('/doc_surat_perintah/'.$sp->file)))
                                 <td><a href="/admin_pu/surat_perintah/download/{{$sp->file}}">{{$sp->file}}</a></td>
                                 @else
@@ -113,20 +113,44 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p class="modal-text">
-                        <label>No Surat Perintah :</label>
-                        <p id="no_surat_perintah"></p>
-                        <label>Tanggal :</label>
-                        <p id="tanggal"></p>
-                        <label>Lokasi:</label>
-                        <p id="lokasi"></p>
-                        <label>Pesan:</label>
-                        <p id="pesan"></p>
-                        <label>Laporan:</label>
-                        <p id="laporan"></p>
-                        <label>Status:</label>
-                        <p id="status"></p>
-                </p>
+
+                <div class="tabbable">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#tab1" data-toggle="tab">Section 1</a></li>
+                        <li><a href="#tab2" data-toggle="tab">Section 2</a></li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab1">
+                            <p class="modal-text">
+                                <label>No Surat Perintah :</label>
+                                <p id="no_surat_perintah"></p>
+                                <label>Tanggal Surat Perintah Keluar:</label>
+                                <p id="tanggal"></p>
+                                <label>Lokasi:</label>
+                                <p id="lokasi"></p>
+                                <label>Pesan:</label>
+                                <p id="pesan"></p>
+                                <label>Laporan:</label>
+                                <p id="laporan"></p>
+                                <label>Status:</label>
+                                <p id="status"></p>
+                            </p>
+                        </div>
+                        <div class="tab-pane" id="tab2">
+                            <p class="modal-text">
+                                <label>Tanggal Kejadian:</label>
+                                <label>Tanggal Pengaduan:</label>
+                                <label>Judul:</label>
+                                <label>Isi Pesan:</label>
+                                <label>File:</label>
+                                <label>Gambar:</label>
+                                <label>Jenis Pengaduan:</label>
+                                <label>Rakyat:</label>
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -187,10 +211,10 @@
                                 <label class="custom-file-label" for="file_doc" id="label_doc_edit">Pilih file doc</label>
                             </div>
                         </div>
+
                         <div class="form-group">
                             <label>Status:</label>
                             <select class="form-control" name="status_laporan_edit" id="status_laporan_edit">
-                                <option value="0">Pending</option>
                                 <option value="1">Done</option>
                                 <option value="2">Cancel</option>
                             </select>
@@ -250,6 +274,10 @@
 </div>
 
 <script>
+    $('#tab_id').trigger('click');
+</script>
+
+<script>
     function toEdit() {
         $('#edit_modal').modal('show');
         $('#validation_alert').hide();
@@ -287,8 +315,8 @@
                 $('#pesan_edit').val(response.pesan);
                 $('#laporan_edit').val(response.laporan);
                 $('#id_edit').val(response.id);
-                $('#dinas_pembuat_edit').val(response.dinas_pembuat);
-                $('#dinas_tujuan_edit').val(response.dinas_tujuan);
+                $('#dinas_pembuat_edit').val(response.pegawai_dinas_pembuat);
+                $('#dinas_tujuan_edit').val(response.pegawai_dinas_tujuan);
 
                 $('#btn_update').attr('onclick', 'update(' + id + ')');
             },

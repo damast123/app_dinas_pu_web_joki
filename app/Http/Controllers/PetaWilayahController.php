@@ -101,7 +101,7 @@ class PetaWilayahController extends Controller
             $query = PetaWilayah::create([
                 'gambar'    => $nama_gambar,
                 'file'      => $nama_file,
-                'dinas_id'  => $id
+                'pegawai_dinas_id'  => $id
             ]);
 
             if($query) {

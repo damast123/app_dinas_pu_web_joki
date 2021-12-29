@@ -204,11 +204,7 @@ class PengaduanController extends Controller
 
         if($update_pengaduan) {
             $stat = "";
-            if($request->status_pengaduan==1)
-            {
-                $stat = "Proses";
-            }
-            elseif($request->status_pengaduan==2)
+            if($request->status_pengaduan==2)
             {
                 $stat = "Selesai";
             }

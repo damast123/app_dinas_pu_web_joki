@@ -92,7 +92,7 @@ class ProfileController extends Controller
         foreach($profile as $val)
         {
             $dinas = Dinas::select('*')
-            ->where('id',$val->dinas_id)
+            ->where('id',$val->pegawai_dinas_id)
             ->get();
 
         }
@@ -151,7 +151,7 @@ class ProfileController extends Controller
             'struktur_organisasi'  => $nama_file,
             'tugas_pokok'      => $request->tugas,
             'fungsi'  => $request->fungsi,
-            'dinas_id' => $id,
+            'pegawai_dinas_id' => $id,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);

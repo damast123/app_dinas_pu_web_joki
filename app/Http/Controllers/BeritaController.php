@@ -98,7 +98,7 @@ class BeritaController extends Controller
             'judul_berita'      => $request->judul_berita,
             'isi_berita'  => $request->isi_berita,
             'gambar_berita' => $nama_file,
-            'dinas_id' => $id,
+            'pegawai_dinas_id' => $id,
         ]);
         if($add_berita)
         {

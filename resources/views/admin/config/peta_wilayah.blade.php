@@ -21,7 +21,7 @@
                             <th>No</th>
                             <th>File</th>
                             <th>Gambar</th>
-                            <th>Dinas Yang Mengupload</th>
+                            <th>Pegawai Dinas Yang Mengupload</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -30,7 +30,7 @@
                             <th>No</th>
                             <th>File</th>
                             <th>Gambar</th>
-                            <th>Dinas Yang Mengupload</th>
+                            <th>Pegawai Dinas Yang Mengupload</th>
                             <th>Action</th>
                         </tr>
                     </tfoot>

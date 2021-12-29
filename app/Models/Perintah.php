@@ -12,7 +12,7 @@ class Perintah extends Model
     protected $primaryKey = 'id';
     public $timestamps = false;
     protected $fillable = [
-        'no_surat_perintah', 'tanggal', 'pesan', 'lokasi', 'laporan', 'file', 'gambar', 'status', 'dinas_pembuat', 'dinas_tujuan'];
+        'no_surat_perintah', 'tanggal', 'pesan', 'lokasi', 'laporan', 'file', 'gambar', 'status', 'pegawai_dinas_pembuat', 'pegawai_dinas_tujuan'];
 
     public function dinas_pembuat()
     {

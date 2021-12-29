@@ -14,10 +14,10 @@ class AlterPerintahs extends Migration
     public function up()
     {
         Schema::table('perintahs', function (Blueprint $table) {
-            $table->bigInteger('dinas_pembuat')->unsigned();
-            $table->bigInteger('dinas_tujuan')->unsigned();
-            $table->foreign('dinas_pembuat')->references('id')->on('dinas');
-            $table->foreign('dinas_tujuan')->references('id')->on('dinas');
+            $table->bigInteger('pegawai_dinas_pembuat')->unsigned();
+            $table->bigInteger('pegawai_dinas_tujuan')->unsigned();
+            $table->foreign('pegawai_dinas_pembuat')->references('id')->on('pegawai_dinas');
+            $table->foreign('pegawai_dinas_tujuan')->references('id')->on('pegawai_dinas');
         });
 
     }
