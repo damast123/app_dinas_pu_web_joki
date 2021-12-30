@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class PerintahController extends Controller
@@ -114,6 +115,8 @@ class PerintahController extends Controller
             Pengaduan::where('id',$request->pengaduan_assign)
             ->update([
                 'status_pengaduan'      => '1',
+                'pegawai_dinas_id'      => $request->dinas_tujuan,
+                'perintah_id'           => $add_perintah->id
             ]);
             $emailDinasTujuan = Dinas::where('id',$request->pegawai_dinas_tujuan)->get();
             $details = [
@@ -172,7 +175,35 @@ class PerintahController extends Controller
     {
         $perintah_show = Perintah::find($request->id);
 
-	    return response()->json($perintah_show);
+        $pengaduan_show = Pengaduan::where('perintah_id',$perintah_show->id)->firstOrFail();
+
+        $rakyat_show = Rakyat::find($pengaduan_show->rakyat_id);
+
+        $output[] = [
+            'no_surat_perintah'     => $perintah_show->no_surat_perintah,
+            'tanggal'               => $perintah_show->tanggal,
+            'lokasi'                => $perintah_show->lokasi,
+            'pesan'                 => $perintah_show->pesan,
+            'laporan'               => $perintah_show->laporan,
+            'status'                => $perintah_show->status,
+            'tanggal_pengaduan'     => $pengaduan_show->tanggal_pengaduan,
+            'tanggal_kejadian'      => $pengaduan_show->tanggal_kejadian,
+            'judul_pengaduan'       => $pengaduan_show->judul_pengaduan,
+            'isi_pesan'             => $pengaduan_show->isi_pengaduan,
+            'jenis_pengaduan'       => $pengaduan_show->jenis_pengaduan,
+            'status_pengaduan'      => $pengaduan_show->status_pengaduan,
+            'nama_rakyat'           => $rakyat_show->name,
+        ];
+
+        // $data = DB::table('perintahs')
+        //  ->join('pengaduans', 'perintahs.id', '=', 'pengaduans.perintah_id')
+        //  ->join('rakyats', 'pengaduans.rakyat_id', '=', 'rakyats.id')
+        //  ->select('perintahs.*', 'pengaduans.tanggal_pengaduan', 'pengaduans.tanggal_kejadian', 'pengaduans.judul_pengaduan', 'pengaduans.isi_pengaduan', 'pengaduans.jenis_pengaduan','pengaduans.status_pengaduan','rakyats.name')
+        //  ->where('id',$request->id)
+        //  ->paginate(3);
+
+
+	    return response()->json($output);
     }
 
     /**

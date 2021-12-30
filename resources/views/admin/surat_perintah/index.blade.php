@@ -1,3 +1,7 @@
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+</head>
+
 <div class="container-fluid">
 
     <!-- Page Heading -->
@@ -37,7 +41,6 @@
                             <th>Pegawai Dinas Tujuan</th>
                             <th>File</th>
                             <th>Gambar</th>
-                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -48,7 +51,6 @@
                             <th>Pegawai Dinas Tujuan</th>
                             <th>File</th>
                             <th>Gambar</th>
-                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                     </tfoot>
@@ -64,17 +66,11 @@
                                 <td>No File</td>
                                 @endif
                                 @if (file_exists(public_path('/gambar_surat_perintah/'.$sp->gambar)))
-                                <td><a href="{{ url('/gambar_surat_perintah/'.$sp->gambar) }}"><img src="{{ url('/gambar_surat_perintah/'.$sp->gambar) }}" alt="..." class="d-block img-fluid" height="400" width="400"></a></td>
+                                <td><a href="{{ url('/gambar_surat_perintah/'.$sp->gambar) }}"><img src="{{ url('/gambar_surat_perintah/'.$sp->gambar) }}" alt="..." class="d-block img-fluid" height="100" width="100"></a></td>
                                 @else
-                                <td><img src="https://cdn.bodybigsize.com/wp-content/uploads/2020/03/noimage-15.png" alt="..." class="d-block img-fluid" height="400" width="400"></td>
+                                <td><img src="https://cdn.bodybigsize.com/wp-content/uploads/2020/03/noimage-15.png" alt="..." class="d-block img-fluid" height="100" width="100"></td>
                                 @endif
-                                @if ($sp->status === 0)
-                                    <td>Pending</td>
-                                @elseif ($sp->status === 1)
-                                    <td>Done</td>
-                                @else
-                                    <td>Cancel</td>
-                                @endif
+
                                 <td><button onclick="show('{{$sp->id}}')" class="btn btn-secondary btn-circle">
                                     <i class="fas fa-eye"></i>
                                 </button>
@@ -140,13 +136,17 @@
                         <div class="tab-pane" id="tab2">
                             <p class="modal-text">
                                 <label>Tanggal Kejadian:</label>
+                                <p id="tanggal_kejadian"></p>
                                 <label>Tanggal Pengaduan:</label>
+                                <p id="tanggal_pengaduan"></p>
                                 <label>Judul:</label>
+                                <p id="judul_pengaduan"></p>
                                 <label>Isi Pesan:</label>
-                                <label>File:</label>
-                                <label>Gambar:</label>
+                                <p id="pesan_pengaduan"></p>
                                 <label>Jenis Pengaduan:</label>
-                                <label>Rakyat:</label>
+                                <p id="jenis_pengaduan"></p>
+                                <label>Nama Pengadu:</label>
+                                <p id="nama_pengadu"></p>
                             </p>
                         </div>
                     </div>
@@ -393,17 +393,23 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: function(response) {
-                console.log(response);
-                $('#no_surat_perintah').html(response.no_surat_perintah);
-                $('#tanggal').html(response.tanggal);
-                $('#lokasi').html(response.lokasi);
-                $('#pesan').html(response.pesan);
-                $('#laporan').html(response.laporan);
-                if(response.status==0)
+                console.log(response[0]);
+                $('#no_surat_perintah').html(response[0].no_surat_perintah);
+                $('#tanggal').html(response[0].tanggal);
+                $('#lokasi').html(response[0].lokasi);
+                $('#pesan').html(response[0].pesan);
+                $('#laporan').html(response[0].laporan);
+                $('#nama_pengadu').html(response[0].nama_rakyat);
+                $('#jenis_pengaduan').html(response[0].jenis_pengaduan);
+                $('#tanggal_pengaduan').html(response[0].tanggal_pengaduan);
+                $('#pesan_pengaduan').html(response[0].pesan);
+                $('#judul_pengaduan').html(response[0].judul_pengaduan);
+                $('#tanggal_kejadian').html(response[0].tanggal_kejadian);
+                if(response[0].status==0)
                 {
                     $('#status').html("Pending");
                 }
-                else if(response.status==1)
+                else if(response[0].status==1)
                 {
                     $('#status').html("Done");
                 }
