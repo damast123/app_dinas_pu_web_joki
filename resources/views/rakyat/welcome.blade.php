@@ -49,7 +49,7 @@
         <div class="row content">
             <div class="col-lg-12" data-aos="fade-right">
                 <h2>Profil Perusahaan</h2>
-                <h3>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</h3>
+                {!! $data['informasi_pu']['informasi_pu'] !!}
             </div>
         </div>
         <br>
@@ -59,58 +59,101 @@
     </section><!-- End About Us Section -->
 
     <!-- ======= Hero Section ======= -->
-  <section id="hero">
+    @if (count($gallery)>0)
+        <section id="hero">
 
-    <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
+            <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
 
-      <div class="carousel-inner" role="listbox">
+            <div class="carousel-inner" role="listbox">
 
-        <!-- Slide 1 -->
-        <div class="carousel-item active" style="background-image: url(assets/img/slide/slide-1.jpg);">
-          <div class="carousel-container">
-            <div class="carousel-content animate__animated animate__fadeInUp">
-              <h2>Welcome to <span>Company</span></h2>
-              <p>Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
-              <div class="text-center"><a href="" class="btn-get-started">Read More</a></div>
+
+                @if (count($gallery)==1)
+                <!-- Slide 1 -->
+                <div class="carousel-item active" style="background-image: url('{{ url('/gallery/'.$gallery[0]->file) }}');">
+                    <div class="carousel-container">
+                        <div class="carousel-content animate__animated animate__fadeInUp">
+                        <h2>{{$gallery[0]->title}}</h2>
+                        <p>{{$gallery[0]->keterangan}}</p>
+                        </div>
+                </div>
+                </div>
+
+                @elseif (count($gallery)==2)
+                <!-- Slide 1 -->
+                <div class="carousel-item active" style="background-image: url('{{ url('/gallery/'.$gallery[0]->file) }}');">
+                    <div class="carousel-container">
+                        <div class="carousel-content animate__animated animate__fadeInUp">
+                        <h2>{{$gallery[0]->title}}</h2>
+                        <p>{{$gallery[0]->keterangan}}</p>
+                        </div>
+                </div>
+                </div>
+
+                <!-- Slide 2 -->
+                <div class="carousel-item" style="background-image: url('{{ url('/gallery/'.$gallery[1]->file) }}');">
+                    <div class="carousel-container">
+                        <div class="carousel-content animate__animated animate__fadeInUp">
+                            <h2>{{$gallery[1]->title}}</h2>
+                            <p>{{$gallery[1]->keterangan}}</p>
+                        </div>
+                    </div>
+                </div>
+
+                @else
+                <!-- Slide 1 -->
+                <div class="carousel-item active" style="background-image: url('{{ url('/gallery/'.$gallery[0]->file) }}');">
+                    <div class="carousel-container">
+                        <div class="carousel-content animate__animated animate__fadeInUp">
+                        <h2>{{$gallery[0]->title}}</h2>
+                        <p>{{$gallery[0]->keterangan}}</p>
+                        </div>
+                </div>
+                </div>
+
+                <!-- Slide 2 -->
+                <div class="carousel-item" style="background-image: url('{{ url('/gallery/'.$gallery[1]->file) }}');">
+                    <div class="carousel-container">
+                        <div class="carousel-content animate__animated animate__fadeInUp">
+                            <h2>{{$gallery[1]->title}}</h2>
+                            <p>{{$gallery[1]->keterangan}}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 3 -->
+                <div class="carousel-item" style="background-image: url('{{ url('/gallery/'.$gallery[2]->file) }}');">
+                    <div class="carousel-container">
+                        <div class="carousel-content animate__animated animate__fadeInUp">
+                            <h2>{{$gallery[2]->title}}</h2>
+                            <p>{{$gallery[2]->keterangan}}</p>
+                        </div>
+                    </div>
+                </div>
+
+                @endif
+
+
             </div>
-          </div>
-        </div>
 
-        <!-- Slide 2 -->
-        <div class="carousel-item" style="background-image: url(assets/img/slide/slide-2.jpg);">
-          <div class="carousel-container">
-            <div class="carousel-content animate__animated animate__fadeInUp">
-              <h2>Lorem Ipsum Dolor</h2>
-              <p>Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
-              <div class="text-center"><a href="" class="btn-get-started">Read More</a></div>
+            <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
+            </a>
+
+            <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
+                <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
+            </a>
+
+            <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
+
             </div>
-          </div>
+        </section><!-- End Hero -->
+
+    @else
+        <div style="display:flex; justify-content:center;">
+            <h1>No Image</h1>
         </div>
-
-        <!-- Slide 3 -->
-        <div class="carousel-item" style="background-image: url(assets/img/slide/slide-3.jpg);">
-          <div class="carousel-container">
-            <div class="carousel-content animate__animated animate__fadeInUp">
-              <h2>Sequi ea ut et est quaerat</h2>
-              <p>Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
-              <div class="text-center"><a href="" class="btn-get-started">Read More</a></div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
-      </a>
-
-      <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
-        <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
-      </a>
-
-      <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
-
-    </div>
-  </section><!-- End Hero -->
-
+        <br>
+        <br>
+        <br>
+    @endif
   </main><!-- End #main -->

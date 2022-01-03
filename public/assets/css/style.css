@@ -453,10 +453,10 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 0;
   width: auto;
   height: auto;
-  background: rgba(255, 255, 255, 0.4);
+  background: rgb(5, 5, 5);
   border-radius: 50px;
   transition: 0.3s;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 0, 0, 0.877);
   width: 54px;
   height: 54px;
   display: flex;
@@ -465,8 +465,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #hero .carousel-control-next-icon:hover, #hero .carousel-control-prev-icon:hover {
-  background: rgba(255, 255, 255, 0.6);
-  color: rgba(255, 255, 255, 0.8);
+  background: rgb(2, 2, 2);
+  color: rgb(255, 0, 0, 0.877);
 }
 
 #hero .carousel-indicators li {

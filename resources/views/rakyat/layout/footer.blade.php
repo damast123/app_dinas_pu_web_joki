@@ -6,13 +6,12 @@
         <div class="row">
 
           <div class="col-lg-3 col-md-6 footer-contact">
-            <h3>Company</h3>
+            <h3>Dinas Pekerjaan Umum Sumber Daya Air</h3>
             <p>
-              A108 Adam Street <br>
-              New York, NY 535022<br>
-              United States <br><br>
-              <strong>Phone:</strong> +1 5589 55488 55<br>
-              <strong>Email:</strong> info@example.com<br>
+              Kabupaten Sumenep <br>
+              Indonesia <br><br>
+              <strong>Phone:</strong> +62 8784923829<br>
+              <strong>Email:</strong> dinasPUSumenep@mail.com<br>
             </p>
           </div>
 
@@ -24,7 +23,7 @@
 
       <div class="me-md-auto text-center text-md-start">
         <div class="copyright">
-          &copy; Copyright <strong><span>Company</span></strong>. All Rights Reserved
+          &copy; Copyright. All Rights Reserved
         </div>
         <div class="credits">
           <!-- All the links in the footer should remain intact. -->

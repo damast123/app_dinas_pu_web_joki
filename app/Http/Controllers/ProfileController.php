@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Dinas;
 use App\Models\Profile;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Gallery;
 use Illuminate\Support\Facades\DB;
 
 class ProfileController extends Controller
@@ -15,9 +15,13 @@ class ProfileController extends Controller
 
     public function index()
     {
+        $gallery = Gallery::orderBy('id','desc')->limit(3)->get();
+        $about = Profile::all()->last();
+
         $data = [
             'content' => 'rakyat.welcome',
-
+            'gallery' => $gallery,
+            'informasi_pu' => $about
         ];
         return view('rakyat.layout.index', ['data' => $data]);
     }
