@@ -70,6 +70,7 @@
                 <a class="collapse-item" href="{{url('/admin_pu/ganti_profile_perusahaan')}}">Ganti Profil Perusahaan</a>
                 <a class="collapse-item" href="{{url('/admin_pu/jabatan')}}">Jabatan</a>
                 <a class="collapse-item" href="{{url('/admin_pu/role')}}">Role</a>
+                <a class="collapse-item" href="{{url('/admin_pu/daerah')}}">Daerah</a>
                 <a class="collapse-item" href="{{url('/admin_pu/dinas')}}">Dinas</a>
             </div>
         </div>

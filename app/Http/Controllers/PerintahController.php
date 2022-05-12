@@ -7,10 +7,7 @@ use App\Models\Pengaduan;
 use App\Models\Perintah;
 use App\Models\Rakyat;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class PerintahController extends Controller

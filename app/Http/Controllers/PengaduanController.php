@@ -36,6 +36,7 @@ class PengaduanController extends Controller
     {
         $pengaduan = Pengaduan::all();
         $rakyat = [];
+
         foreach ($pengaduan as $value) {
             $rakyat[] = $value->rakyat;
         }

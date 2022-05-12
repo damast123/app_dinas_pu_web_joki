@@ -41,8 +41,8 @@
                             <td>{{$key+1}}</td>
                             <td>{{$b->tanggal_berita}}</td>
                             <td>{{$b->judul_berita}}</td>
-                            @if (file_exists(public_path('/berita/'.$b->gambar_berita)))
-                                <td><a href="{{ url('/berita/'.$b->gambar_berita) }}"><img style="height: 200px;width: 200px" src="{{ url('/berita/'.$b->gambar_berita) }}" alt="..." class="d-block img-fluid"></a></td>
+                            @if (file_exists(public_path('/file_berita/'.$b->gambar_berita)))
+                                <td><a href="{{ url('/file_berita/'.$b->gambar_berita) }}"><img style="height: 200px;width: 200px" src="{{ url('/file_berita/'.$b->gambar_berita) }}" alt="..." class="d-block img-fluid"></a></td>
                             @else
                                 <td><img src="https://cdn.bodybigsize.com/wp-content/uploads/2020/03/noimage-15.png" alt="..." class="d-block img-fluid" height="400" width="400"></td>
                             @endif

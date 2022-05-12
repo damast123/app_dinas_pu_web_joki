@@ -61,4 +61,9 @@ class Dinas extends Authenticable
     {
         return $this->hasMany('App\Models\Pengaduan');
     }
+
+    public function petawilayah()
+    {
+        return $this->hasOne('App\Models\PetaWilayah');
+    }
 }

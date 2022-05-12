@@ -72,7 +72,7 @@
                                 @endif
                             </div>
                             @if ($berita->gambar_berita)
-                                <img width="150px" height="150px" src="{{ url('/berita/'.$berita->gambar_berita) }}">
+                                <img width="150px" height="150px" src="{{ url('/file_berita/'.$berita->gambar_berita) }}">
                             @endif
                             <div class="form-group">
                                 <div class="custom-file">

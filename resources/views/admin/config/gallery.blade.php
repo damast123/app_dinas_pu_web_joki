@@ -69,16 +69,16 @@
                                     <td>{{ $image->title }}</td>
                                     <td>{{ $image->keterangan }}</td>
                                     @if (strpos($image->file,'.jpg') !== false || strpos($image->file,'.png') !== false || strpos($image->file,'.jpeg') !== false || strpos($image->file,'.gif') !== false || strpos($image->file,'.svg') !== false)
-                                        @if (file_exists(public_path('/gallery/'.$image->gambar)))
-                                            <td><a href="{{ url('/gallery/'.$image->file) }}"><img style="height: 200px;width: 200px" src="{{ url('/gallery/'.$image->file) }}" alt="..." class="d-block img-fluid"></a></td>
+                                        @if (file_exists(public_path('/file_gallery/'.$image->gambar)))
+                                            <td><a href="{{ url('/file_gallery/'.$image->file) }}"><img style="height: 200px;width: 200px" src="{{ url('/file_gallery/'.$image->file) }}" alt="..." class="d-block img-fluid"></a></td>
                                         @else
                                             <td><img src="https://cdn.bodybigsize.com/wp-content/uploads/2020/03/noimage-15.png" alt="..." class="d-block img-fluid" height="400" width="400"></td>
                                         @endif
 
                                     @else
-                                        @if (file_exists(public_path('/gallery/'.$image->gambar)))
-                                            <td><video width="200" height="200" controls class="thumb" data-full="{{ url('/gallery/'.$image->file) }}">
-                                                <source src="{{ url('/gallery/'.$image->file) }}"></video>
+                                        @if (file_exists(public_path('/file_gallery/'.$image->gambar)))
+                                            <td><video width="200" height="200" controls class="thumb" data-full="{{ url('/file_gallery/'.$image->file) }}">
+                                                <source src="{{ url('/file_gallery/'.$image->file) }}"></video>
                                             </td>
                                         @else
                                             <td><img src="https://static.thenounproject.com/png/3255198-200.png" alt="..." class="d-block img-fluid" height="400" width="400"></td>

@@ -71,18 +71,13 @@
                     <li class="d-flex align-items-center"><i class="bi bi-person"></i> <p>{{$dinas[$key]->name}}</p></li>
                   </ul>
                 </div>
-                @if ($pw->file)
 
                     <div class="entry-content">
-                        <p>
-                        {{$pw->file}}
-                        </p>
                         <div class="read-more">
-                            <a href="">Download File</a>
-                            <a href="{{ url('/petawilayah/show/').$pw->id }}">View File</a>
+                            <a href="{{ url('/petawilayah/show').'/'.$pw->id }}">View Detail</a>
                         </div>
                     </div>
-                @endif
+
 
 
               </article>

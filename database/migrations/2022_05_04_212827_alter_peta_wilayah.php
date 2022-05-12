@@ -15,7 +15,9 @@ class AlterPetaWilayah extends Migration
     {
         Schema::table('peta_wilayahs', function (Blueprint $table) {
             $table->bigInteger('pegawai_dinas_id')->unsigned();
+            $table->bigInteger('daerah_id')->unsigned();
             $table->foreign('pegawai_dinas_id')->references('id')->on('pegawai_dinas');
+            $table->foreign('daerah_id')->references('id')->on('daerahs');
         });
     }
 

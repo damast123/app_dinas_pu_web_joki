@@ -15,11 +15,12 @@ class CreatePetaWilayahsTable extends Migration
     {
         Schema::create('peta_wilayahs', function (Blueprint $table) {
             $table->id();
-            $table->text('daerah')->nullable();
+            $table->text('judul');
+            $table->date('tanggal_dibuat');
+            $table->text('deskripsi');
             $table->text('file')->nullable();
             $table->text('gambar')->nullable();
-
-
+            $table->text('link');
         });
     }
 

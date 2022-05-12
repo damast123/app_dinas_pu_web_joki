@@ -71,17 +71,17 @@
           @foreach ($gallery as $g)
             @if (strpos($g->file,'.jpg') !== false || strpos($g->file,'.png') !== false || strpos($g->file,'.jpeg') !== false || strpos($g->file,'.gif') !== false || strpos($g->file,'.svg') !== false)
                 <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-                    <img src="{{ url('/gallery/'.$g->file) }}" class="img-fluid" alt="">
+                    <img src="{{ url('/file_gallery/'.$g->file) }}" class="img-fluid" alt="">
                     <div class="portfolio-info">
                         <h4>{{ $g->title }}</h4>
                         <p>{{ $g->keterangan }}</p>
-                        <a href="{{ url('/gallery/'.$g->file) }}" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link"><i class="bx bx-plus"></i></a>
+                        <a href="{{ url('/file_gallery/'.$g->file) }}" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link"><i class="bx bx-plus"></i></a>
                     </div>
                 </div>
             @else
                 <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-                    <video width="300" height="300" controls class="thumb" data-full="{{ url('/gallery/'.$g->file) }}">
-                        <source src="{{ url('/gallery/'.$g->file) }}">
+                    <video width="300" height="300" controls class="thumb" data-full="{{ url('/file_gallery/'.$g->file) }}">
+                        <source src="{{ url('/file_gallery/'.$g->file) }}">
                     </video>
                     <div class="portfolio-info">
                         <h4>{{ $g->title }}</h4>

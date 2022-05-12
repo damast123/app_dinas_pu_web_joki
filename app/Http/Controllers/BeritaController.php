@@ -104,7 +104,7 @@ class BeritaController extends Controller
         {
             if($file!=null)
             {
-                $tujuan_upload = 'berita';
+                $tujuan_upload = 'file_berita';
 		        $file->move($tujuan_upload,$nama_file);
             }
 
@@ -214,7 +214,7 @@ class BeritaController extends Controller
             {
                 if($file!=null)
                 {
-                    $tujuan_upload = 'berita';
+                    $tujuan_upload = 'file_berita';
                     $file->move($tujuan_upload,$nama_file);
                 }
 

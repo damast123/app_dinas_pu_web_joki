@@ -63,7 +63,7 @@
                 <article class="entry">
                     @if ($b->gambar_berita!=null)
                         <div class="entry-img">
-                            <img src="{{url('/berita/'.$b->gambar_berita)}}" alt="" class="img-fluid">
+                            <img src="{{url('/file_berita/'.$b->gambar_berita)}}" alt="" class="img-fluid">
                         </div>
                     @else
                         <div class="entry-img">
@@ -107,7 +107,7 @@
                 <div class="post-item clearfix">
                     @if ($brt->gambar_berita!=null)
                     <div class="entry-img">
-                        <img src="{{url('/berita/'.$brt->gambar_berita)}}" alt="" class="img-fluid">
+                        <img src="{{url('/file_berita/'.$brt->gambar_berita)}}" alt="" class="img-fluid">
                     </div>
                     @else
                         <div class="entry-img">

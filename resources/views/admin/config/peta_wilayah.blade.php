@@ -19,7 +19,7 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>File</th>
+                            <th>Daerah</th>
                             <th>Gambar</th>
                             <th>Pegawai Dinas Yang Mengupload</th>
                             <th>Action</th>
@@ -28,18 +28,24 @@
                     <tfoot>
                         <tr>
                             <th>No</th>
-                            <th>File</th>
+                            <th>Daerah</th>
                             <th>Gambar</th>
                             <th>Pegawai Dinas Yang Mengupload</th>
                             <th>Action</th>
                         </tr>
                     </tfoot>
+                    {{Logger($petawilayah)}}
                     <tbody>
                         @foreach ($petawilayah as $key => $pw)
+
                             <tr>
                                 <td>{{$key+1}}</td>
-                                <td>{{$pw->file}}</td>
-                                <td>{{$pw->gambar}}</td>
+                                <td>{{$daerah[$key]->nama_daerah}}</td>
+                                @if (file_exists(public_path('/petawilayahgambar/'.$pw->gambar)))
+                                    <td><a href="{{ url('/petawilayahgambar/'.$pw->gambar) }}"><img style="height: 200px;width: 200px" src="{{ url('/petawilayahgambar/'.$pw->gambar) }}" alt="..." class="d-block img-fluid"></a></td>
+                                @else
+                                    <td><img src="https://cdn.bodybigsize.com/wp-content/uploads/2020/03/noimage-15.png" alt="..." class="d-block img-fluid" height="400" width="400"></td>
+                                @endif
                                 <td>{{$dinas[$key]->name}}</td>
                                 <td><button onclick="showPetaWilayah('{{$pw->id}}')" class="btn btn-secondary btn-circle">
                                     <i class="fas fa-eye"></i></td>
@@ -71,6 +77,23 @@
                     </div>
                     <form method="post" id="form_data" enctype="multipart/form-data">
                         <div class="form-group">
+                            <label>Judul:</label>
+                            <input type="text" name="input_judul" id="input_judul" class="form-control" placeholder="Masukkan judul pembuatan peta wilayah">
+                        </div>
+                        <div class="form-group">
+                            <label>Deskripsi:</label>
+                            <textarea name="input_desc" id="input_desc" rows="4" class="form-control" placeholder="Masukkan deskripsi singkat"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="input_daerah">Daerah</label>
+                            <select class="form-control" id="input_daerah" name="input_daerah">
+                                <option value="">--Pilih--</option>
+                                @foreach($input_daerah as $iddaerah)
+                                    <option value="{{ $iddaerah->id }}">{{ $iddaerah->nama_daerah }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" name="gambar" id="gambar">
                                 <label class="custom-file-label" for="gambar">Pilih gambar</label>
@@ -81,6 +104,10 @@
                                 <input type="file" class="custom-file-input" name="file_doc" id="file_doc">
                                 <label class="custom-file-label" for="file_doc">Pilih file</label>
                             </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Input link:</label>
+                            <input type="text" name="input_link" id="input_link" class="form-control" placeholder="Masukkan link google earth">
                         </div>
                     </form>
                 </p>
@@ -104,8 +131,15 @@
             </div>
             <div class="modal-body">
                 <p class="modal-text">
-                    <img src="" id="preview_gambar">
-                    <a href="">download_doc</a>
+                    <label>tanggal dibuat : </label>
+                    <p id='tanngal_dibuat_show'></p>
+
+                    <label>documentation : </label>
+                    <a href="" id="download_doc">download_doc</a>
+                    <br>
+                    <label>Link : </label>
+                    <a href="http://www.gmail.com/" id="get_link">Link google earth</a>
+
                 </p>
             </div>
             <div class="modal-footer md-button">
@@ -152,8 +186,18 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: function(response) {
-                $('#preview_gambar').attr('src', "{{ url('/petawilayahgambar/') }}".response.gambar);
-                $('#download_doc').attr('href', '');
+                console.log(response);
+                if(response[0].file!=null)
+                {
+                    $('#download_doc').attr('href', '/admin_pu/peta_wilayah/download/'+response[0].file);
+                }
+                else
+                {
+                    $('#download_doc').hide();
+                }
+
+                var link = 'http://'+response[0].link;
+                $("a[href='http://www.gmail.com/']").attr('href', link);
             },
             error: function() {
             }
@@ -165,6 +209,7 @@
     }
     function create() {
         var postData = new FormData($("#form_data")[0]);
+        console.log(postData);
         $.ajax({
             url: '{{ url("/admin_pu/peta_wilayah/store") }}',
             type: 'POST',

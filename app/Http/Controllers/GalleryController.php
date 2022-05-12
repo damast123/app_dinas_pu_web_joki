@@ -82,7 +82,7 @@ class GalleryController extends Controller
             if($query) {
                 if($file!=null)
                 {
-                    $tujuan_upload = 'gallery';
+                    $tujuan_upload = 'file_gallery';
                     $file->move($tujuan_upload,$nama_file);
                 }
                 $response = [

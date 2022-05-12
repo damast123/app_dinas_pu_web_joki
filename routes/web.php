@@ -16,6 +16,7 @@ use App\Http\Controllers\PetaWilayahController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RegisterRakyatController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\DaerahController;
 use App\Http\Controllers\PerintahController;
 use App\Http\Controllers\SendMailController;
 use Illuminate\Support\Facades\Auth;
@@ -97,6 +98,7 @@ Route::post('/admin_pu/pengaduan/update',[PengaduanController::class,'update']);
 Route::get('/admin_pu/peta_wilayah',[PetaWilayahController::class,'indexadmin']);
 Route::post('/admin_pu/peta_wilayah/store',[PetaWilayahController::class,'store']);
 Route::post('/admin_pu/peta_wilayah/show',[PetaWilayahController::class,'show']);
+Route::get('/admin_pu/peta_wilayah/download/{filename}',[PetaWilayahController::class,'getDownload']);
 
 Route::get('/admin_pu/surat_perintah',[PerintahController::class,'index']);
 Route::get('/admin_pu/surat_perintah/create',[PerintahController::class,'create']);
@@ -109,6 +111,10 @@ Route::post('/admin_pu/surat_perintah/softdelete',[PerintahController::class,'so
 Route::post('/admin_pu/surat_perintah/harddelete',[PerintahController::class,'harddeleted']);
 Route::get('/admin_pu/surat_perintah/download/{filename}',[PerintahController::class,'getDownload']);
 
+Route::get('/admin_pu/daerah',[DaerahController::class,'index']);
+Route::post('/admin_pu/daerah/edit',[DaerahController::class,'edit']);
+Route::post('/admin_pu/daerah/update',[DaerahController::class,'update']);
+Route::post('/admin_pu/daerah/store',[DaerahController::class,'store']);
 
 Route::get('/admin_pu/send-mail', [\App\Http\Controllers\SendMailController::class, 'send']);
 
@@ -135,9 +141,7 @@ Route::get('/berita', [BeritaController::class,'index']);
 Route::get('/berita/show/{id}', [BeritaController::class,'show']);
 Route::get('/agenda', [AgendaController::class,'index']);
 Route::get('/petawilayah', [PetaWilayahController::class,'index']);
-
-//view peta wilayah
-Route::get('/petawilayah/show', [PetaWilayahController::class,'show']);
+Route::get('/petawilayah/show/{id}',[PetaWilayahController::class,'showrakyat']);
 
 
 Auth::routes();

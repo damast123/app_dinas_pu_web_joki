@@ -69,7 +69,7 @@
 
                 @if (count($gallery)==1)
                 <!-- Slide 1 -->
-                <div class="carousel-item active" style="background-image: url('{{ url('/gallery/'.$gallery[0]->file) }}');">
+                <div class="carousel-item active" style="background-image: url('{{ url('/file_gallery/'.$gallery[0]->file) }}');">
                     <div class="carousel-container">
                         <div class="carousel-content animate__animated animate__fadeInUp">
                         <h2>{{$gallery[0]->title}}</h2>
@@ -80,7 +80,7 @@
 
                 @elseif (count($gallery)==2)
                 <!-- Slide 1 -->
-                <div class="carousel-item active" style="background-image: url('{{ url('/gallery/'.$gallery[0]->file) }}');">
+                <div class="carousel-item active" style="background-image: url('{{ url('/file_gallery/'.$gallery[0]->file) }}');">
                     <div class="carousel-container">
                         <div class="carousel-content animate__animated animate__fadeInUp">
                         <h2>{{$gallery[0]->title}}</h2>
@@ -90,7 +90,7 @@
                 </div>
 
                 <!-- Slide 2 -->
-                <div class="carousel-item" style="background-image: url('{{ url('/gallery/'.$gallery[1]->file) }}');">
+                <div class="carousel-item" style="background-image: url('{{ url('/file_gallery/'.$gallery[1]->file) }}');">
                     <div class="carousel-container">
                         <div class="carousel-content animate__animated animate__fadeInUp">
                             <h2>{{$gallery[1]->title}}</h2>
@@ -101,7 +101,7 @@
 
                 @else
                 <!-- Slide 1 -->
-                <div class="carousel-item active" style="background-image: url('{{ url('/gallery/'.$gallery[0]->file) }}');">
+                <div class="carousel-item active" style="background-image: url('{{ url('/file_gallery/'.$gallery[0]->file) }}');">
                     <div class="carousel-container">
                         <div class="carousel-content animate__animated animate__fadeInUp">
                         <h2>{{$gallery[0]->title}}</h2>
@@ -111,7 +111,7 @@
                 </div>
 
                 <!-- Slide 2 -->
-                <div class="carousel-item" style="background-image: url('{{ url('/gallery/'.$gallery[1]->file) }}');">
+                <div class="carousel-item" style="background-image: url('{{ url('/file_gallery/'.$gallery[1]->file) }}');">
                     <div class="carousel-container">
                         <div class="carousel-content animate__animated animate__fadeInUp">
                             <h2>{{$gallery[1]->title}}</h2>
@@ -121,7 +121,7 @@
                 </div>
 
                 <!-- Slide 3 -->
-                <div class="carousel-item" style="background-image: url('{{ url('/gallery/'.$gallery[2]->file) }}');">
+                <div class="carousel-item" style="background-image: url('{{ url('/file_gallery/'.$gallery[2]->file) }}');">
                     <div class="carousel-container">
                         <div class="carousel-content animate__animated animate__fadeInUp">
                             <h2>{{$gallery[2]->title}}</h2>

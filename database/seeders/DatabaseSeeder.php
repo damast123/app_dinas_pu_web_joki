@@ -20,7 +20,8 @@ class DatabaseSeeder extends Seeder
             DinasSeeder::class,
             RakyatSeeder::class,
             ProfileSeeder::class,
-            KategoriPengaduanSeeder::class
+            KategoriPengaduanSeeder::class,
+            DaerahSeeder::class
         ]);
     }
 }

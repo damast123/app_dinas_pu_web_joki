@@ -43,10 +43,10 @@
     <div class="container">
 
       <div class="d-flex justify-content-between align-items-center">
-        <h2>Berita</h2>
+        <h2>Peta Wilayah</h2>
         <ol>
           <li>Home</li>
-          <li>Detail Berita</li>
+          <li>Detail Peta Wilayah</li>
         </ol>
       </div>
 
@@ -60,9 +60,9 @@
 
         <div class="col-lg-12 entries">
                 <article class="entry entry-single">
-                    @if ($berita->gambar_berita!=null)
+                    @if ($petawilayah->gambar!=null)
                         <div class="entry-img">
-                            <img src="{{url('/file_berita/'.$berita->gambar_berita)}}" alt="" class="img-fluid">
+                            <img src="{{url('/petawilayahgambar/'.$petawilayah->gambar)}}" alt="" class="img-fluid">
                         </div>
                     @else
                         <div class="entry-img">
@@ -71,19 +71,30 @@
                     @endif
 
                     <h2 class="entry-title">
-                        <a href="blog-single.html">{{$berita->judul_berita}}</a>
+                        <a href="blog-single.html">{{$petawilayah->judul}}</a>
                     </h2>
 
                     <div class="entry-meta">
                     <ul>
                         <li class="d-flex align-items-center"><i class="bi bi-person"></i>{{ $dinas->name }}</li>
-                        <li class="d-flex align-items-center"><i class="bi bi-clock"></i>Tanggal Muat : {{$berita->tanggal_muat}}</li>
+                        <li class="d-flex align-items-center"><i class="bi bi-clock"></i>{{$petawilayah->tanggal_dibuat}}</li>
+                        <li class="d-flex align-items-center"><i class="bi bi-map"></i>{{$daerah->nama_daerah}}</li>
                     </ul>
                     </div>
 
                     <div class="entry-content">
                         <p>
-                            {!! $berita->isi_berita !!}
+                            {!! $petawilayah->deskripsi !!}
+                        </p>
+                        <p>
+                            link untuk download dokumentasi <a href="/admin_pu/peta_wilayah/download/{{$petawilayah->file}}">pdf</a>
+                        </p>
+                        <p>
+                            @if (substr($petawilayah->file, 0, 7) == "http://" || substr($petawilayah->file, 0, 8) == "https://")
+                                link untuk melihat peta wilayah di <a href=" {{$petawilayah->link}}">google earth</a>
+                            @else
+                                link untuk melihat peta wilayah di lah kok? <a href=" https://{{$petawilayah->link}}">google earth</a>
+                            @endif
                         </p>
                     </div>
 

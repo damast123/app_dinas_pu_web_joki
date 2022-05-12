@@ -12,11 +12,16 @@ class PetaWilayah extends Model
     protected $primaryKey = 'id';
     public $timestamps = false;
     protected $fillable = [
-        'file', 'gambar', 'pegawai_dinas_id'];
+        'judul', 'deskripsi', 'tanggal_dibuat', 'file', 'gambar', 'link','pegawai_dinas_id','daerah_id'];
 
     public function dinas()
     {
         return $this->belongsTo('App\Models\Dinas');
+    }
+
+    public function daerah()
+    {
+        return $this->belongsTo('App\Models\Daerah');
     }
 
 }
