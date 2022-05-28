@@ -77,6 +77,13 @@ class PerintahController extends Controller
             'dinas_tujuan.required' => 'Dinas Tujuan Tidak Boleh Kosong',
 
         ]);
+        $cek_no_surat = Perintah::where('no_surat_perintah',$request->no_surat_perintah)->firstOrFail();
+
+        if($cek_no_surat)
+        {
+            return back()->with('error', 'Surat perintah sudah ada, silahkan input no surat yang lain.');
+        }
+
         $file = $request->file('file_doc');
         $gambar = $request->file('gambar');
 		if($file==null)

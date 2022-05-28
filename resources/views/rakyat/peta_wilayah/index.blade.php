@@ -56,7 +56,13 @@
     <div class="container" data-aos="fade-up">
 
       <div class="row">
-
+        @if ($petawilayah->isEmpty())
+            <article class="entry">
+                    <h2 class="entry-title" style="text-align: center; padding-top: 5%; padding-bottom: 5%">
+                        <p>No Data</p>
+                    </h2>
+            </article>
+        @else
         <div class="col-lg-8 entries">
             @foreach ($petawilayah as $key => $pw)
             <article class="entry">
@@ -68,7 +74,7 @@
 
                 <div class="entry-meta">
                   <ul>
-                    <li class="d-flex align-items-center"><i class="bi bi-person"></i> <p>{{$dinas[$key]->name}}</p></li>
+                    <li class="d-flex align-items-center"><i class="bi bi-person"></i> {{$dinas[$key]->name}}</li>
                   </ul>
                 </div>
 
@@ -86,7 +92,7 @@
                 {{ $petawilayah->links() }}
             </div>
         </div><!-- End blog entries list -->
-
+        @endif
 
       </div>
 

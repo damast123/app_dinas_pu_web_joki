@@ -132,8 +132,11 @@
             <div class="modal-body">
                 <p class="modal-text">
                     <label>tanggal dibuat : </label>
-                    <p id='tanngal_dibuat_show'></p>
-
+                    <span id='tanngal_dibuat_show'></span>
+                    <br>
+                    <label>deskripsi : </label>
+                    <span id='deskripsi_show'></span>
+                    <br>
                     <label>documentation : </label>
                     <a href="" id="download_doc">download_doc</a>
                     <br>
@@ -195,6 +198,9 @@
                 {
                     $('#download_doc').hide();
                 }
+
+                $('#tanngal_dibuat_show').html(response[0].tanggal_dibuat);
+                $('#deskripsi_show').html(response[0].deskripsi);
 
                 var link = 'http://'+response[0].link;
                 $("a[href='http://www.gmail.com/']").attr('href', link);

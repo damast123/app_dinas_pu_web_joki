@@ -35,8 +35,18 @@ class DaerahController extends Controller
                 'message'  => $validation->errors()
             ];
         } else {
+            $nama_daerah = strtoupper($request->nama_daerah);
+            $cek_daerah = Daerah::where('nama_daerah',$nama_daerah)->first();
+            if($cek_daerah !== null)
+            {
+                $response = [
+                    'status'  => 500,
+                    'message' => 'Data daerah sudah ada, silahkan input data daerah lain.'
+                ];
+                return response()->json($response);
+            }
             $query = Daerah::create([
-                'nama_daerah'  => $request->nama_daerah,
+                'nama_daerah'  => $nama_daerah,
             ]);
 
             if($query) {
@@ -77,6 +87,16 @@ class DaerahController extends Controller
                 'message'  => $validation->errors()
             ];
         } else {
+            $nama_daerah = strtoupper($request->nama_daerah);
+            $cek_daerah = Daerah::where('nama_daerah',$nama_daerah)->first();
+            if($cek_daerah!==null)
+            {
+                $response = [
+                    'status'  => 500,
+                    'message' => 'Data daerah sudah ada, silahkan input data daerah lain.'
+                ];
+                return response()->json($response);
+            }
             $query = Daerah::where('id', $request->id)->update([
                 'nama_daerah'  => $request->nama_daerah,
             ]);

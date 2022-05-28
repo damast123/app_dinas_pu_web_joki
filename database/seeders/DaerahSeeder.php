@@ -14,7 +14,7 @@ class DaerahSeeder extends Seeder
      */
     public function run()
     {
-        $states = ["Bangkalan","Sampang","Pamekasan","Sumenep","Kalianget"];
+        $states = ["BANGKALAN","SAMPANG","PAMEKASAN","SUMENEP","KALIANGET"];
 
         for ($item=0; $item < count($states); $item++) {
             foreach ($states as $state) {

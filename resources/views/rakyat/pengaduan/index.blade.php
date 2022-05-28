@@ -57,48 +57,62 @@
       <div class="row">
 
         <div class="col-lg-12 entries">
-            @foreach ($pengaduan as $key => $p)
+            @if ($pengaduan->isEmpty())
             <article class="entry">
 
-                <div class="entry-img">
-                  <img src="{{url('/gambarpengaduan/'.$p->file)}}" alt="" class="img-fluid">
-                </div>
-
-                <h2 class="entry-title">
-                  <p>{{$p->judul_pengaduan}}</p>
+                <h2 class="entry-title" style="text-align: center; padding-top: 5%; padding-bottom: 5%">
+                <p>No Data</p>
                 </h2>
 
-                <div class="entry-meta">
-                  <ul>
-                    <li class="d-flex align-items-center"><i class="bi bi-person"></i> {{$rakyat[$key]->name}}</li>
-                    <li class="d-flex align-items-center"><i class="bi bi-clock"></i>{{$p->tanggal_pengaduan}}</li>
-                    <li class="d-flex align-items-center"><i class="bi bi-tag"></i>{{$p->jenis_pengaduan}}</li>
-                  </ul>
-                </div>
+            </article>
 
-                <div class="entry-content">
-                  <h4>
-                    Tanggal kejadian : {{$p->tanggal_kejadian}}
-                  </h4>
-                  <p>
-                    {{$p->isi_pengaduan}}
-                  </p>
-                  <div class="read-more">
-                    @if ($p->status==0)
-                        <h2>Status : Menunggu</h2>
-                    @elseif ($p->status==1)
-                        <h2>Status : Proses</h2>
-                    @elseif ($p->status==2)
-                        <h2>Status : Selesai</h2>
-                    @else
-                        <h2>Status : Tidak di acc</h2>
-                    @endif
-                  </div>
-                </div>
+            @else
+                @foreach ($pengaduan as $key => $p)
+                <article class="entry">
 
-              </article>
-            @endforeach
+                    <div class="entry-img">
+                    <img src="{{url('/gambarpengaduan/'.$p->file)}}" alt="" class="img-fluid">
+                    </div>
 
+                    <h2 class="entry-title">
+                    <p>{{$p->judul_pengaduan}}</p>
+                    </h2>
+
+                    <div class="entry-meta">
+                    <ul>
+                        <li class="d-flex align-items-center"><i class="bi bi-person"></i> {{$rakyat[$key]->name}}</li>
+                        <li class="d-flex align-items-center"><i class="bi bi-clock"></i>{{$p->tanggal_pengaduan}}</li>
+                        <li class="d-flex align-items-center"><i class="bi bi-tag"></i>{{$p->jenis_pengaduan}}</li>
+                    </ul>
+                    </div>
+
+                    <div class="entry-content">
+                    <h4>
+                        Tanggal kejadian : {{$p->tanggal_kejadian}}
+                    </h4>
+                    <p>
+                        {{$p->isi_pengaduan}}
+                    </p>
+                    <div class="read-more">
+                        @if ($p->status_pengaduan==0)
+                            <h2>Status : Menunggu</h2>
+                        @elseif ($p->status_pengaduan==1)
+                            <h2>Status : Proses</h2>
+                        @elseif ($p->status_pengaduan==2)
+                            <h2>Status : Selesai</h2>
+                        @else
+                            <h2>Status : Tidak di acc</h2>
+                        @endif
+                    </div>
+                    </div>
+
+                </article>
+                @endforeach
+            @endif
+
+            <div class="blog-pagination" style="text-align:center">
+                {{ $pengaduan->links() }}
+            </div>
 
         </div><!-- End blog entries list -->
 

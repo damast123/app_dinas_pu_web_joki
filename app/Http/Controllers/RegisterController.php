@@ -54,6 +54,12 @@ class RegisterController extends Controller
             return redirect()->back()->withErrors($validator)->withInput($request->all);
         }
 
+        $cekData = Dinas::select('*')->orWhere('email','=',$request->email)->first();
+        if($cekData)
+        {
+            return redirect()->back()->withErrors('Email sudah terpakai, silahkan input email yang lain');
+        }
+
         $user = new Dinas;
         $user->name = $request->name;
         $user->email = $request->email;
@@ -67,11 +73,9 @@ class RegisterController extends Controller
         $simpan = $user->save();
 
         if($simpan){
-            Session::flash('success', 'Register berhasil! Silahkan login untuk mengakses data');
             return redirect()->route('login_admin');
         } else {
-            Session::flash('errors', ['' => 'Register gagal! Silahkan ulangi beberapa saat lagi']);
-            return redirect()->route('register_admin');
+            return redirect()->back()->withErrors('Register gagal! Silahkan ulangi beberapa saat lagi');
         }
     }
 

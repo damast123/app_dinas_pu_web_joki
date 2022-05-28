@@ -57,53 +57,139 @@
     <div class="container" data-aos="fade-up">
 
       <div class="row">
+        @if ($agenda->isEmpty())
+            <div class="col-lg-8 entries">
+                <article class="entry">
+                        <h2 class="entry-title" style="text-align: center; padding-top: 5%; padding-bottom: 5%">
+                            <p>No Data</p>
+                        </h2>
+                </article>
 
-        <div class="col-lg-8 entries">
-            @foreach ($agenda as $key => $a)
-            <article class="entry">
+            </div><!-- End blog entries list -->
 
-                <h2 class="entry-title">
-                  <p>{{$a->nama_event}}</p>
-                </h2>
+            <div class="col-lg-4">
 
-                <div class="entry-meta">
-                  <ul>
-                    <li class="d-flex align-items-center"><i class="bi bi-person"></i> <p>{{$dinas[$key]->name}}</p></li>
-                    <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <p>Tanggal : {{$a->tanggal_mulai}} - {{$a->tanggal_akhir}}</p></li>
-                    <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <p><time>Jam : {{$a->jam}}</time></p></li>
-                  </ul>
-                </div>
+            <div class="sidebar">
+                <h3 class="sidebar-title" style="text-align: center; padding-top: 5%; padding-bottom: 5%">Agenda besok</h3>
+            </div><!-- End sidebar -->
 
-                <div class="entry-content">
-                    <i class="bi bi-pin-map"></i><p>
-                        Tempat : {!!$a->tempat_event!!}
-                    </p>
-                    <p>
-                        {!!$a->isi_event!!}
-                    </p>
-                </div>
+            </div><!-- End blog sidebar -->
 
-              </article>
-            @endforeach
+        @else
+            <div class="col-lg-8 entries">
+                @foreach ($agenda as $key => $a)
+                <article class="entry">
 
-            <div class="blog-pagination">
-                {{$agenda->links()}}
-            </div>
-        </div><!-- End blog entries list -->
+                    <h2 class="entry-title">
+                    <p>{{$a->nama_event}}</p>
+                    </h2>
 
-        <div class="col-lg-4">
-          <div class="sidebar">
-            <h3 class="sidebar-title">Agenda besok</h3>
-            <div class="sidebar-item recent-posts">
-                @foreach ($agenda_besok as $ab)
-                    <div class="post-item clearfix">
-                        <h4><a href="blog-single.html">Nihil blanditiis at in nihil autem</a></h4>
-                        <time datetime="2020-01-01">Jan 1, 2020</time>
+                    <div class="entry-meta">
+                    <ul>
+                        <li class="d-flex align-items-center"><i class="bi bi-person"></i> {{$dinas[$key][0]->name}}</li>
+                        <li class="d-flex align-items-center"><i class="bi bi-calendar"></i> {{$a->tanggal_mulai}} - {{$a->tanggal_akhir}}</li>
+                        <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <time>{{$a->jam}}</time></li>
+                        <li class="d-flex align-items-center"><i class="bi bi-pin-map"></i> {!!$a->tempat_event!!}</li>
+                    </ul>
                     </div>
+
+                    <div class="entry-content">
+                        <p>
+                            {!!$a->isi_event!!}
+                        </p>
+                    </div>
+
+                </article>
                 @endforeach
-            </div><!-- End sidebar recent posts-->
-          </div><!-- End sidebar -->
-        </div><!-- End blog sidebar -->
+
+                <div class="blog-pagination">
+                    {{$agenda->links()}}
+                </div>
+            </div><!-- End blog entries list -->
+
+            <div class="col-lg-4">
+            <div class="sidebar">
+                <h3 class="sidebar-title">Agenda sebelumnya</h3>
+
+                    @foreach ($agenda_sebelum as $as)
+                    <h4>{{$as->nama_event}}</h4>
+                    <p>{!!$as->tempat_event!!}</p>
+                    <button onclick="show('{{$as->id}}')" class="btn btn-secondary btn-circle">
+                        show</button>
+                    <br>
+                    <br>
+                    @endforeach
+
+            </div><!-- End sidebar -->
+            </div><!-- End blog sidebar -->
+        @endif
       </div>
     </div>
+
+    <div id="show_modal" class="modal animated  fadeInUp" data-backdrop="static" role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Agenda Detail</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="modal-text">
+                            <label>Nama event :</label>
+                            <span id="name_show"></span>
+                            <p></p>
+                            <label>Tanggal :</label>
+                            <span id="tanggal_show"></span>
+                            <p></p>
+                            <label>Jam:</label>
+                            <time id="jam_show"></time>
+                            <p></p>
+                            <label>Deskripsi:</label>
+                            <p id="deskripsi_show"></p>
+                            <label>Tempat event:</label>
+                            <span id="tempat_show"></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
   </section><!-- End Blog Section -->
+
+<script>
+
+    function toShow() {
+        $('#show_modal').modal('show');
+        $('#validation_alert').hide();
+        $('#validation_content').html('');
+    }
+
+
+    function show(id){
+        toShow();
+        $.ajax({
+            url: '{{ url("/agenda/show") }}',
+            type: 'POST',
+            dataType: 'JSON',
+            data: {
+                id: id
+            },
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(response) {
+                console.log(response);
+                $('#name_show').html(response.nama_event);
+                $('#tanggal_show').html(response.tanggal_mulai+' - '+response.tanggal_akhir);
+                $('#jam_show').html(response.jam);
+                $('#deskripsi_show').html(response.isi_event);
+                $('#tempat_show').html(response.tempat_event);
+            },
+            error: function() {
+
+            }
+        });
+    }
+
+</script>

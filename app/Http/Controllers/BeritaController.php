@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Berita;
+use App\Models\Dinas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -20,9 +21,11 @@ class BeritaController extends Controller
         $berita = Berita::cursorPaginate(10);
         $beritarecent = Berita::where('tanggal_muat','!=',$date->toDateTimeString())->orderBy('tanggal_muat', 'desc')->take(5)->get();
         $dinas = [];
-        foreach($berita as $val)
+        foreach($berita as $value)
         {
-            $dinas[] = $val->dinas;
+            $dinas[] = Dinas::select('*')
+            ->where('id',$value->pegawai_dinas_id)
+            ->get();
         }
         $data = [
             'content'       => 'rakyat.berita',
@@ -37,9 +40,12 @@ class BeritaController extends Controller
     {
         $berita = Berita::all();
         $dinas = [];
-        foreach($berita as $val)
+
+        foreach($berita as $value)
         {
-            $dinas[] = $val->dinas;
+            $dinas = Dinas::select('*')
+            ->where('id',$value->pegawai_dinas_id)
+            ->get();
         }
         $data = [
             'content' => 'admin.berita.index',

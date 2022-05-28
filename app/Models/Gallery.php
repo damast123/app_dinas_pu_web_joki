@@ -12,7 +12,7 @@ class Gallery extends Model
     protected $primaryKey = 'id';
     public $timestamps = false;
     protected $fillable = [
-        'file', 'title', 'keterangan'];
+        'file', 'title', 'keterangan','created_at','update_at','pegawai_dinas_id'];
     public function dinas()
     {
         return $this->belongsTo('App\Models\Dinas');

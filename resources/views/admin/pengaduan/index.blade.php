@@ -114,7 +114,7 @@
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
                         <ul id="validation_content"></ul>
                     </div>
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <form id="form_data">
                         <div class="form-group">
                             <label>Id :</label>
                             <input type="text" name="id" id="id_edit" class="form-control" readonly>
@@ -157,7 +157,7 @@
                                 <option value="3">Tidak di acc</option>
                             </select>
                         </div>
-
+                    </form>
                 </p>
             </div>
             <div class="modal-footer md-button">
@@ -238,7 +238,7 @@
 
 
 
-                $('#btn_update').attr('onclick', 'update(' + id + ')');
+                $('#btn_update').attr('onclick', 'update(' + response.id + ')');
             },
             error: function() {
 
@@ -261,14 +261,10 @@
 
     function update(id) {
         $.ajax({
-            cache: false,
             url: '{{ url("/admin_pu/pengaduan/update") }}',
             type: 'POST',
             dataType: 'JSON',
-            data: {
-                id: id,
-                status_pengaduan: $("#status_pengaduan_edit").val(),
-            },
+            data: $('#form_data').serialize(),
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
@@ -289,24 +285,7 @@
                     $('#validation_content').append(`<p>`+response.message+`</p>`);
                 }
             },
-            error: function(jqXHR, exception) {
-                var msg = '';
-                if (jqXHR.status === 0) {
-                    msg = 'Not connect.\n Verify Network.';
-                } else if (jqXHR.status == 404) {
-                    msg = 'Requested page not found. [404]';
-                } else if (jqXHR.status == 500) {
-                    msg = 'Internal Server Error [500].';
-                } else if (exception === 'parsererror') {
-                    msg = 'Requested JSON parse failed.';
-                } else if (exception === 'timeout') {
-                    msg = 'Time out error.';
-                } else if (exception === 'abort') {
-                    msg = 'Ajax request aborted.';
-                } else {
-                    msg = 'Uncaught Error.\n' + jqXHR.responseText;
-                }
-                console.log("error ini mah... "+msg);
+            error: function() {
                 $('.modal-body').scrollTop(0);
             }
         });

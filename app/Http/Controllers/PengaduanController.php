@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\KategoriPengaduan;
 use App\Models\Pengaduan;
+use App\Models\Dinas;
 use App\Models\Rakyat;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -19,7 +20,8 @@ class PengaduanController extends Controller
      */
     public function index()
     {
-        $pengaduan = Pengaduan::all();
+        $pengaduan = Pengaduan::cursorPaginate(5);
+
         $rakyat = [];
         foreach ($pengaduan as $value) {
             $rakyat[] = $value->rakyat;
@@ -79,7 +81,6 @@ class PengaduanController extends Controller
             'tanggal_kejadian' => 'required',
             'lokasi_pengaduan' => 'required',
             'katpengaduan' => 'required',
-            'file' => 'required|max:2048|mimes:doc,docx,pdf',
             'gambar' => 'required|max:2048|mimes:jpeg,png,jpg,gif,svg',
         ], [
             'jenis_pengaduan.required' => 'Jenis Pengaduan Tidak Boleh Kosong',
@@ -88,9 +89,6 @@ class PengaduanController extends Controller
             'tanggal_kejadian.required' => 'Tanggal Kejadian Tidak Boleh Kosong',
             'lokasi_pengaduan.required' => 'Lokasi Pengaduan Tidak Boleh Kosong',
             'katpengaduan.required' => 'Kategori Pengaduan Tidak Boleh Kosong',
-            'file.required' => 'File Tidak Boleh Kosong',
-            'file.max' => 'File harus max 2048mb',
-            'file.mimes' => 'File Harus Berupa doc Seperti doc,docx,pdf',
             'gambar.required' => 'File Tidak Boleh Kosong',
             'gambar.max' => 'File harus max 2048mb',
             'gambar.mimes' => 'File Harus Berupa Gambar Seperti jpeg,png,jpg,gif,svg',
@@ -128,15 +126,19 @@ class PengaduanController extends Controller
             'status_pengaduan'       => '0',
             'rakyat_id'              => $id,
         ]);
+        $emailDinasTujuan = Dinas::where('jabatan_id','8')->first();
+
         if($add_pengaduan)
         {
+
             $details = [
                 'title' => $request->jenis_pengaduan.' Baru',
                 'body' => 'Ada '. $request->jenis_pengaduan . ' Dengan judul ' . $request->judul_pengaduan . '. Mohon di cek di admin dashboard'
             ];
 
             try {
-                Mail::to("dannyalfandi@gmail.com")->send(new \App\Mail\RakyatMail($details));
+                Mail::to($emailDinasTujuan->email)->send(new \App\Mail\RakyatMail($details));
+                echo "sukses";
             } catch(\Exception $e){
                 echo "Email gagal dikirim karena $e.";
             }

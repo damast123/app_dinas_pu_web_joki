@@ -48,24 +48,23 @@
                     <table class="table table-bordered tableUserAwal" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>No</th>
-                                <th>Title</th>
-                                <th>Keterangan</th>
+                                <th style="width: 15%">Title</th>
+                                <th style="width: 30%">Keterangan</th>
                                 <th>File</th>
+                                <th>Uploader</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
-                                <th>No</th>
-                                <th>Tittle</th>
-                                <th>Keterangan</th>
+                                <th style="width: 15%">Tittle</th>
+                                <th style="width: 30%">Keterangan</th>
                                 <th>File</th>
+                                <th>Uploader</th>
                             </tr>
                         </tfoot>
                         <tbody>
                             @foreach($gallery as $key => $image)
                                 <tr>
-                                    <td>{{$key+1}}</td>
                                     <td>{{ $image->title }}</td>
                                     <td>{{ $image->keterangan }}</td>
                                     @if (strpos($image->file,'.jpg') !== false || strpos($image->file,'.png') !== false || strpos($image->file,'.jpeg') !== false || strpos($image->file,'.gif') !== false || strpos($image->file,'.svg') !== false)
@@ -83,9 +82,8 @@
                                         @else
                                             <td><img src="https://static.thenounproject.com/png/3255198-200.png" alt="..." class="d-block img-fluid" height="400" width="400"></td>
                                         @endif
-
                                     @endif
-
+                                    <td>{{ $dinas[$key][0]->name }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -100,7 +98,7 @@
     <div class="modal-dialog modal-lg modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Add Gallery</h5>
+                <h5 class="modal-title">Tambah gallery</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                 </button>
@@ -112,10 +110,7 @@
                         <ul id="validation_content"></ul>
                     </div>
                     <form id="form_data" enctype="multipart/form-data" method="POST">
-                        @csrf
-                        <div class="center">
-                            <h3>Tambah Gallery</h3>
-                        </div>
+
                         <div class="form-group">
                             <label>Title :</label>
                             <input type="text" name="title" id="title" class="form-control" placeholder="Title">
@@ -201,13 +196,14 @@
     }
     function create() {
         var postData = new FormData($("#form_data")[0]);
+        console.log(postData);
         $.ajax({
-            url: '{{ url("/admin_pu/gallery/add") }}',
+            url: '{{ url("/admin_pu/gallery/store") }}',
             type: 'POST',
             dataType: 'JSON',
             data: postData,
-            processData: false,
             contentType: false,
+            processData: false,
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },

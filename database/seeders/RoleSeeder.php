@@ -14,9 +14,16 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        $role = new Role;
-        $role->nama_role = "admin";
-        $role->timestamps = false;
-        $role->save();
+        $states = ["Pembina Tk. I","Pembina","Penata","Penata Tk. I"];
+
+        for ($item=0; $item < count($states); $item++) {
+            foreach ($states as $role) {
+                $role = new Role;
+                $role->nama_role = $states[$item];
+                $role->timestamps = false;
+                $role->save();
+                $item+=1;
+            }
+        }
     }
 }

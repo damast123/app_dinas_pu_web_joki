@@ -57,72 +57,90 @@
     <div class="container" data-aos="fade-up">
 
       <div class="row">
-
-        <div class="col-lg-8 entries">
-            @foreach ($berita as $key => $b)
+        @if ($berita->isEmpty())
+            <div class="col-lg-8 entries">
                 <article class="entry">
-                    @if ($b->gambar_berita!=null)
-                        <div class="entry-img">
-                            <img src="{{url('/file_berita/'.$b->gambar_berita)}}" alt="" class="img-fluid">
-                        </div>
-                    @else
-                        <div class="entry-img">
-                            <img src="https://sharewell.eu/wp-content/themes/applounge/assets/images/no-image/No-Image-Found-400x264.png" alt="" class="img-fluid">
-                        </div>
-                    @endif
-
-                    <h2 class="entry-title">
-                        <a href="{{url('/berita/show').'/'.$b->id}}">{{$b->judul_berita}}</a>
-                    </h2>
-
-                    <div class="entry-meta">
-                    <ul>
-                        <li class="d-flex align-items-center"><i class="bi bi-person"></i>{{ $dinas[$key]->name }}</li>
-                        <li class="d-flex align-items-center"><i class="bi bi-clock"></i>Tanggal Muat : {{$b->tanggal_muat}}</li>
-                    </ul>
-                    </div>
-
-                    <div class="entry-content">
-                        <div class="read-more">
-                            <a href="{{url('/berita/show').'/'.$b->id}}">Read More</a>
-                        </div>
-                    </div>
-
+                        <h2 class="entry-title" style="text-align: center; padding-top: 5%; padding-bottom: 5%">
+                            <p>No Data</p>
+                        </h2>
                 </article>
-            @endforeach
 
-            <div class="blog-pagination">
-                {{ $berita->links() }}
-            </div>
+            </div><!-- End blog entries list -->
 
-        </div><!-- End blog entries list -->
+            <div class="col-lg-4">
 
-        <div class="col-lg-4">
+            <div class="sidebar">
+                <h3 class="sidebar-title" style="text-align: center; padding-top: 5%; padding-bottom: 5%">Berita Sebelumnya</h3>
+            </div><!-- End sidebar -->
 
-          <div class="sidebar">
+            </div><!-- End blog sidebar -->
 
-            <h3 class="sidebar-title">Berita Sebelumnya</h3>
-            <div class="sidebar-item recent-posts">
-            @foreach ($beritarecent as $brt)
-                <div class="post-item clearfix">
-                    @if ($brt->gambar_berita!=null)
-                    <div class="entry-img">
-                        <img src="{{url('/file_berita/'.$brt->gambar_berita)}}" alt="" class="img-fluid">
-                    </div>
-                    @else
-                        <div class="entry-img">
-                            <img src="https://sharewell.eu/wp-content/themes/applounge/assets/images/no-image/No-Image-Found-400x264.png" alt="" class="img-fluid">
+        @else
+            <div class="col-lg-8 entries">
+                @foreach ($berita as $key => $b)
+                    <article class="entry">
+                        @if ($b->gambar_berita!=null)
+                            <div class="entry-img">
+                                <img src="{{url('/file_berita/'.$b->gambar_berita)}}" alt="" class="img-fluid">
+                            </div>
+                        @else
+                            <div class="entry-img">
+                                <img src="https://sharewell.eu/wp-content/themes/applounge/assets/images/no-image/No-Image-Found-400x264.png" alt="" class="img-fluid">
+                            </div>
+                        @endif
+
+                        <h2 class="entry-title">
+                            <a href="{{url('/berita/show').'/'.$b->id}}">{{$b->judul_berita}}</a>
+                        </h2>
+
+                        <div class="entry-meta">
+                        <ul>
+                            <li class="d-flex align-items-center"><i class="bi bi-person"></i>{{ $dinas[$key][0]->name }}</li>
+                            <li class="d-flex align-items-center"><i class="bi bi-clock"></i>Tanggal Muat : {{$b->tanggal_muat}}</li>
+                        </ul>
                         </div>
-                    @endif
-                  <h4><a href="{{url('/berita/show').'/'.$brt->id}}">{{$brt->judul_berita}}</a></h4>
-                  <h4>{{$brt->tanggal_muat}}</h4>
+
+                        <div class="entry-content">
+                            <div class="read-more">
+                                <a href="{{url('/berita/show').'/'.$b->id}}">Read More</a>
+                            </div>
+                        </div>
+
+                    </article>
+                @endforeach
+
+                <div class="blog-pagination">
+                    {{ $berita->links() }}
                 </div>
-            @endforeach
-            </div><!-- End sidebar recent posts-->
-          </div><!-- End sidebar -->
 
-        </div><!-- End blog sidebar -->
+            </div><!-- End blog entries list -->
 
+            <div class="col-lg-4">
+
+            <div class="sidebar">
+
+                <h3 class="sidebar-title">Berita Sebelumnya</h3>
+                <div class="sidebar-item recent-posts">
+                @foreach ($beritarecent as $brt)
+                    <div class="post-item clearfix">
+                        @if ($brt->gambar_berita!=null)
+                        <div class="entry-img">
+                            <img src="{{url('/file_berita/'.$brt->gambar_berita)}}" alt="" class="img-fluid">
+                        </div>
+                        @else
+                            <div class="entry-img">
+                                <img src="https://sharewell.eu/wp-content/themes/applounge/assets/images/no-image/No-Image-Found-400x264.png" alt="" class="img-fluid">
+                            </div>
+                        @endif
+                    <h4><a href="{{url('/berita/show').'/'.$brt->id}}">{{$brt->judul_berita}}</a></h4>
+                    <h4>{{$brt->tanggal_muat}}</h4>
+                    </div>
+                @endforeach
+                </div><!-- End sidebar recent posts-->
+            </div><!-- End sidebar -->
+
+            </div><!-- End blog sidebar -->
+        @endif
       </div>
 
     </div>

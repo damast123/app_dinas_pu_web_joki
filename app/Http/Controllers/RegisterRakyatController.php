@@ -48,6 +48,14 @@ class RegisterRakyatController extends Controller
             return redirect()->back()->withErrors($validator)->withInput($request->all);
         }
 
+        $cekData = Rakyat::select('*')->orWhere('email','=',$request->email)->orWhere('no_telp','=',$request->no_telp)->first();
+
+        if($cekData !== null)
+        {
+            return redirect()->back()->withErrors('Email atau no telp sudah terpakai. Silahkan isi email atau no telp yang berbeda');
+
+        }
+
         $user = new Rakyat;
         $user->name = $request->name;
         $user->email = $request->email;
@@ -59,11 +67,9 @@ class RegisterRakyatController extends Controller
         $simpan = $user->save();
 
         if($simpan){
-            Session::flash('success', 'Register berhasil! Silahkan login untuk mengakses data');
             return redirect()->route('login_rakyat');
         } else {
-            Session::flash('errors', ['' => 'Register gagal! Silahkan ulangi beberapa saat lagi']);
-            return redirect()->route('register');
+            return redirect()->back()->withErrors('Register gagal! Silahkan ulangi beberapa saat lagi');
         }
     }
 }

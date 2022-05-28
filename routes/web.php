@@ -44,7 +44,7 @@ Route::get('/admin_pu/dinas',[DinasController::class,'index']);
 Route::post('admin_pu/dinas/show',[DinasController::class,'show']);
 
 Route::get('/admin_pu/gallery',[GalleryController::class,'indexadmin']);
-Route::post('/admin_pu/gallery/add',[GalleryController::class,'store']);
+Route::post('/admin_pu/gallery/store',[GalleryController::class,'store']);
 
 Route::get('/admin_pu/ganti_profile_perusahaan',[ProfileController::class,'indexadmin']);
 Route::post('admin_pu/ganti_profile_perusahaan/show',[ProfileController::class,'show']);
@@ -140,6 +140,7 @@ Route::get('/gallery/rakyat',[GalleryController::class,'index']);
 Route::get('/berita', [BeritaController::class,'index']);
 Route::get('/berita/show/{id}', [BeritaController::class,'show']);
 Route::get('/agenda', [AgendaController::class,'index']);
+Route::post('/agenda/show', [AgendaController::class,'show']);
 Route::get('/petawilayah', [PetaWilayahController::class,'index']);
 Route::get('/petawilayah/show/{id}',[PetaWilayahController::class,'showrakyat']);
 

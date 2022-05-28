@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Gallery;
+use App\Models\Dinas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -26,10 +27,19 @@ class GalleryController extends Controller
     {
         $gallery = Gallery::all();
         $count = Gallery::all()->count();
+        $dinas = [];
+        foreach($gallery as $val)
+        {
+            $dinas[] = Dinas::select('*')
+            ->where('id',$val->pegawai_dinas_id)
+            ->get();
+
+        }
         $data = [
             'content' => 'admin.config.gallery',
             'gallery' => $gallery,
-            'count' => $count
+            'dinas'   => $dinas,
+            'count'   => $count
         ];
         return view('admin.layout.index', ['data' => $data]);
     }

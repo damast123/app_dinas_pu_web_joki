@@ -88,16 +88,12 @@ class PetaWilayahController extends Controller
     {
         $validation = Validator::make($request->all(), [
             'gambar'       => 'required|max:2048|mimes:jpeg,png,jpg,gif,svg',
-            'file_doc'     => 'required|max:2048|mimes:doc,pdf,docx',
             'input_link'   => 'required',
             'input_daerah' => 'required'
         ], [
             'gambar.required'               => 'Mohon masukkan gambar.',
             'gambar.max'                    => 'Gambar maksimal 2MB.',
             'gambar.mimes'                  => 'Gambar harus berformat jpeg, jpg, png.',
-            'file_doc.required'             => 'Mohon masukkan file dokumen.',
-            'file_doc.max'                  => 'File maksimal 2MB.',
-            'file_doc.mimes'                => 'File harus berformat doc, docx, pdf.',
             'input_link'                    => 'Mohon input link google earth',
             'input_daerah'                  => 'Mohon pilih daerah'
         ]);

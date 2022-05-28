@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Agenda;
+use App\Models\Dinas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -12,18 +13,20 @@ class AgendaController extends Controller
 
     public function index()
     {
-        $date = Carbon::now()->addDays(1);
-        $agenda = Agenda::cursorPaginate(10);
-        $agenda_besok = Agenda::where('tanggal_mulai',$date->toDateTimeString())->get();
+        $date = Carbon::now();
+        $agenda = Agenda::whereDate('tanggal_mulai','>=',$date->toDateTimeString())->cursorPaginate(10);
+        $agenda_sebelum = Agenda::whereDate('tanggal_mulai','<',$date->toDateTimeString())->get();
         $dinas = [];
         foreach($agenda as $val)
         {
-            $dinas[] = $val->dinas;
+            $dinas[] = Dinas::select('*')
+            ->where('id',$val->pegawai_dinas_id)
+            ->get();
         }
         $data = [
             'content'  => 'rakyat.agenda',
             'agenda' => $agenda,
-            'agenda_besok' => $agenda_besok,
+            'agenda_sebelum' => $agenda_sebelum,
             'dinas' => $dinas
         ];
 
@@ -33,9 +36,11 @@ class AgendaController extends Controller
     {
         $agenda = Agenda::all();
         $dinas = [];
-        foreach($agenda as $val)
+        foreach($agenda as $value)
         {
-            $dinas[] = $val->dinas;
+            $dinas[] = Dinas::select('*')
+            ->where('id',$value->pegawai_dinas_id)
+            ->get();
         }
         $data = [
             'content'  => 'admin.agenda.index',

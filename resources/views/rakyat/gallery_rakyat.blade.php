@@ -56,42 +56,55 @@
   <!-- ======= Portfolio Section ======= -->
   <section id="portfolio" class="portfolio">
     <div class="container">
-
-      <div class="row" data-aos="fade-up">
-        <div class="col-lg-12 d-flex justify-content-center">
-          <ul id="portfolio-flters">
-            <li data-filter="*" class="filter-active">All</li>
-            <li data-filter=".filter-app">Photo</li>
-            <li data-filter=".filter-card">Video</li>
-          </ul>
+    @if ($gallery->isEmpty())
+        <article class="entry">
+                <h2 class="entry-title" style="text-align: center; padding-top: 5%; padding-bottom: 5%">
+                    <p>No Data</p>
+                </h2>
+        </article>
+    @else
+        <div class="row" data-aos="fade-up">
+            <div class="col-lg-12 d-flex justify-content-center">
+            <ul id="portfolio-flters">
+                <li data-filter="*" class="filter-active">All</li>
+                <li data-filter=".filter-app">Photo</li>
+                <li data-filter=".filter-card">Video</li>
+            </ul>
+            </div>
         </div>
-      </div>
 
-      <div class="row portfolio-container" data-aos="fade-up">
-          @foreach ($gallery as $g)
-            @if (strpos($g->file,'.jpg') !== false || strpos($g->file,'.png') !== false || strpos($g->file,'.jpeg') !== false || strpos($g->file,'.gif') !== false || strpos($g->file,'.svg') !== false)
-                <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-                    <img src="{{ url('/file_gallery/'.$g->file) }}" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>{{ $g->title }}</h4>
-                        <p>{{ $g->keterangan }}</p>
-                        <a href="{{ url('/file_gallery/'.$g->file) }}" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link"><i class="bx bx-plus"></i></a>
-                    </div>
-                </div>
-            @else
-                <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-                    <video width="300" height="300" controls class="thumb" data-full="{{ url('/file_gallery/'.$g->file) }}">
-                        <source src="{{ url('/file_gallery/'.$g->file) }}">
-                    </video>
-                    <div class="portfolio-info">
-                        <h4>{{ $g->title }}</h4>
-                        <p>{{ $g->keterangan }}</p>
-                    </div>
-                </div>
-            @endif
-          @endforeach
+        <div class="row portfolio-container" data-aos="fade-up">
 
-      </div>
+            @foreach ($gallery as $g)
+              @if (strpos($g->file,'.jpg') !== false || strpos($g->file,'.png') !== false || strpos($g->file,'.jpeg') !== false || strpos($g->file,'.gif') !== false || strpos($g->file,'.svg') !== false)
+                  <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+                      <img src="{{ url('/file_gallery/'.$g->file) }}" class="img-fluid" alt="">
+                      <div class="portfolio-info">
+                          <h4>{{ $g->title }}</h4>
+                          <p style="margin: 0;
+                          text-overflow: ellipsis;
+                          white-space: nowrap;
+                          overflow: hidden;">{{ $g->keterangan }}</p>
+                          <a href="{{ url('/file_gallery/'.$g->file) }}" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link"><i class="bx bx-plus"></i></a>
+                      </div>
+                  </div>
+              @else
+                  <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+                      <video width="300" height="300" controls class="thumb" data-full="{{ url('/file_gallery/'.$g->file) }}">
+                          <source src="{{ url('/file_gallery/'.$g->file) }}">
+                      </video>
+                      <div class="portfolio-info">
+                          <h4>{{ $g->title }}</h4>
+                          <p style="margin: 0;
+                          text-overflow: ellipsis;
+                          white-space: nowrap;
+                          overflow: hidden;">{{ $g->keterangan }}</p>
+                      </div>
+                  </div>
+              @endif
+            @endforeach
 
+        </div>
+    @endif
     </div>
   </section><!-- End Portfolio Section -->

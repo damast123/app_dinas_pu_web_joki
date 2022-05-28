@@ -19,9 +19,9 @@
             </ul>
           </li>
 
-          <li><a href="{{ url('/berita') }}" class="active">Berita</a></li>
+          <li><a href="{{ url('/berita') }}">Berita</a></li>
           <li><a href="{{ url('/pengaduan') }}">Pegaduan</a></li>
-          <li><a href="{{ url('/petawilayah') }}">Peta Wilayah</a></li>
+          <li><a href="{{ url('/petawilayah') }}" class="active">Peta Wilayah</a></li>
           <li><a href="{{ url('/agenda') }}">Agenda</a></li>
           <li><a href="{{ url('/gallery/rakyat') }}">Gallery</a></li>
         </ul>

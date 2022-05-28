@@ -45,7 +45,7 @@
                                 <td>{{$a->tanggal_mulai}}</td>
                                 <td>{{$a->tanggal_akhir}}</td>
                                 <td>{{$a->jam}}</td>
-                                <td>{{$dinas[$key]->name}}</td>
+                                <td>{{$dinas[$key][0]->name}}</td>
                                 <td><button onclick="show('{{$a->id}}')" class="btn btn-secondary btn-circle">
                                     <i class="fas fa-eye"></i>
                                 </button> <button onclick="edit('{{$a->id}}')" class="btn btn-primary btn-circle">
@@ -74,30 +74,28 @@
             </div>
             <div class="modal-body">
                 <p class="modal-text">
-
-                        <div class="form-group">
-                            <label>Id :</label>
-                            <p id="id_agenda"></p>
-                        </div>
                         <div class="form-group">
                             <label>Nama Event :</label>
-                            <p id="nama_event"></p>
+                            <span id="nama_event"></span>
                         </div>
+                        <p></p>
                         <div class="form-group">
                             <label>Tanggal:</label>
-                            <p><span id="tanggal_mulai"></span> <span> - </span> <span id="tanggal_akhir"></span></p>
+                            <span id="tanggal_mulai"></span> <span> - </span> <span id="tanggal_akhir"></span>
                         </div>
+                        <p></p>
                         <div class="form-group">
                             <label>Jam:</label>
-                            <p id="jam"></p>
+                            <span id="jam"></span>
                         </div>
+                        <p></p>
                         <div class="form-group">
                             <label>Isi Event:</label>
                             <p id="isi_event"></p>
                         </div>
                         <div class="form-group">
                             <label>Tempat Event:</label>
-                            <p id="tempat_event"></p>
+                            <span id="tempat_event"></span>
                         </div>
 
                 </p>
