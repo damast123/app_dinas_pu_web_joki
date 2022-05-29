@@ -20,7 +20,7 @@ class PengaduanController extends Controller
      */
     public function index()
     {
-        $pengaduan = Pengaduan::cursorPaginate(5);
+        $pengaduan = Pengaduan::orderBy('tanggal_pengaduan','DESC')->cursorPaginate(5);
 
         $rakyat = [];
         foreach ($pengaduan as $value) {

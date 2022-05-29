@@ -39,6 +39,7 @@
   </header><!-- End Header -->
 
   <!-- ======= Breadcrumbs ======= -->
+  <br>
 <section id="breadcrumbs" class="breadcrumbs">
     <div class="container">
 
@@ -88,7 +89,7 @@
 
               </article>
             @endforeach
-            <div class="blog-pagination">
+            <div class="blog-pagination" style="text-align: center">
                 {{ $petawilayah->links() }}
             </div>
         </div><!-- End blog entries list -->

@@ -39,6 +39,7 @@
   </header><!-- End Header -->
 
 <!-- ======= Breadcrumbs ======= -->
+<br>
 <section id="breadcrumbs" class="breadcrumbs">
     <div class="container">
 
@@ -61,7 +62,7 @@
         <div class="col-lg-12 entries">
                 <article class="entry entry-single">
                     @if ($petawilayah->gambar!=null)
-                        <div class="entry-img">
+                        <div class="entry-img" style="text-align: center">
                             <img src="{{url('/petawilayahgambar/'.$petawilayah->gambar)}}" alt="" class="img-fluid">
                         </div>
                     @else

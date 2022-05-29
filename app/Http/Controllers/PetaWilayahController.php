@@ -16,7 +16,7 @@ class PetaWilayahController extends Controller
 {
     public function index()
     {
-        $petawilayah = PetaWilayah::cursorPaginate(10);
+        $petawilayah = PetaWilayah::cursorPaginate(5);
         $dinas= [];
         $daerah=[];
 

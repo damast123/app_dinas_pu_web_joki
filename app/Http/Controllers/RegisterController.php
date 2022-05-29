@@ -33,8 +33,9 @@ class RegisterController extends Controller
     {
         $rules = [
             'name'                  => 'required|min:3|max:35',
-            'email'                 => 'required|email|unique:users,email',
-            'password'              => 'required|confirmed'
+            'email'                 => 'required|email',
+            'no_telp'               => 'required',
+            'password'              => 'required|confirmed',
         ];
 
         $messages = [
@@ -43,7 +44,7 @@ class RegisterController extends Controller
             'name.max'              => 'Nama lengkap maksimal 35 karakter',
             'email.required'        => 'Email wajib diisi',
             'email.email'           => 'Email tidak valid',
-            'email.unique'          => 'Email sudah terdaftar',
+            'no_telp'               => 'Nomor telephone wajib diisi',
             'password.required'     => 'Password wajib diisi',
             'password.confirmed'    => 'Password tidak sama dengan konfirmasi password'
         ];
@@ -68,6 +69,7 @@ class RegisterController extends Controller
         $user->alamat = $request->alamat;
         $user->tanggal_lahir = $request->tanggal_lahir;
         $user->tempat_lahir = $request->tempat_lahir;
+        $user->no_telp = $request->no_telp;
         $user->jabatan_id = $request->jabatan;
         $user->role_id = $request->role;
         $simpan = $user->save();

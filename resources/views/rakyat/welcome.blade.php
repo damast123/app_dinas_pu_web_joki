@@ -45,7 +45,9 @@
     <!-- ======= About Us Section ======= -->
     <section id="about-us" class="about-us">
       <div class="container" data-aos="fade-up">
-
+        <br>
+        <br>
+        <br>
         <div class="row content">
             <div class="col-lg-12" data-aos="fade-right">
                 <h2>Profil Perusahaan</h2>

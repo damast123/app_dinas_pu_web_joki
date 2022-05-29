@@ -63,6 +63,10 @@
                                         placeholder="Alamat" name="alamat">
                                 </div>
                                 <div class="form-group">
+                                    <input type="text" class="form-control form-control-user" id="no_telp"
+                                        placeholder="No Telephone" name="no_telp">
+                                </div>
+                                <div class="form-group">
                                     <input type="date" class="form-control form-control-user" id="tanggal_lahir"
                                         name="tanggal_lahir">
                                 </div>

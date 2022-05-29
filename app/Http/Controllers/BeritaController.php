@@ -28,7 +28,7 @@ class BeritaController extends Controller
             ->get();
         }
         $data = [
-            'content'       => 'rakyat.berita',
+            'content'       => 'rakyat.berita.index',
             'berita'        => $berita,
             'beritarecent'  => $beritarecent,
             'dinas'         => $dinas
@@ -125,10 +125,11 @@ class BeritaController extends Controller
     public function show($id)
     {
         $berita = Berita::find($id);
-
-        $dinas = $berita->dinas;
+        $dinas = Dinas::select('*')
+        ->where('id',$berita->pegawai_dinas_id)
+        ->first();
         $data = [
-            'content'   => 'rakyat.show_berita',
+            'content'   => 'rakyat.berita.show_berita',
             'berita'    => $berita,
             'dinas'     => $dinas
         ];

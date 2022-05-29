@@ -69,17 +69,22 @@
             <div class="modal-body">
                 <p class="modal-text">
                         <label>Name :</label>
-                        <p id="name"></p>
+                        <span id="name"></span>
+                        <br>
                         <label>Alamat :</label>
-                        <p id="alamat"></p>
+                        <span id="alamat"></span>
+                        <br>
                         <label>Tanggal lahir:</label>
-                        <p id="tanggal_lahir"></p>
+                        <span id="tanggal_lahir"></span>
+                        <br>
                         <label>Tempat lahir:</label>
-                        <p id="tempat_lahir"></p>
+                        <span id="tempat_lahir"></span>
+                        <br>
                         <label>No telepon:</label>
-                        <p id="no_telp"></p>
+                        <span id="no_telp"></span>
+                        <br>
                         <label>Email:</label>
-                        <p id="email"></p>
+                        <span id="email"></span>
                 </p>
             </div>
         </div>
