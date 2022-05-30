@@ -31,6 +31,10 @@ class LoginController extends Controller
 
             return redirect()->intended('/admin_pu/dashboard');
         }
+        else
+        {
+            return back()->with('error', 'Gagal Login. Silahkan dicoba lagi atau hubungi pihak admin');
+        }
         return back()->withInput($request->only('email', 'remember'));
     }
 }

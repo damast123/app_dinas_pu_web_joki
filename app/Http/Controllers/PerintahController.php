@@ -379,6 +379,8 @@ class PerintahController extends Controller
         $query = Perintah::find($request->id)->delete();
         if($query)
         {
+            Pengaduan::where('perintah_id',$request->id)
+            ->update(['pegawai_dinas_id'=>null,'perintah_id'=>null]);
             $response = [
                 'status'  => 200,
                 'message' => 'Data telah diproses.'

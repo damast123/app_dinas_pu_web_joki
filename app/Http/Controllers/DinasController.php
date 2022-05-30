@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Dinas;
 use App\Models\Role;
 use App\Models\Jabatan;
+use App\Models\Pengaduan;
+use App\Models\Perintah;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -148,22 +150,38 @@ class DinasController extends Controller
 
     public function deleted(Request $request)
     {
-        $query = Dinas::find($request->id)->delete();
-        if($query)
-        {
-            $response = [
-                'status'  => 200,
-                'message' => 'Data telah diproses.'
-            ];
+        $cekKepalaDinas = Dinas::join('jabatans','pegawai_dinas.jabatan_id','=','jabatans.id')->where('jabatans.nama_jabatan','LIKE','%Kepala Dinas%')->get();
 
+        $response = [];
+
+        if($cekKepalaDinas->count()>1)
+        {
+            $query = Dinas::find($request->id)->delete();
+            if($query)
+            {
+                $getNewAssign = Dinas::select('pegawai_dinas.id')->join('jabatans','pegawai_dinas.jabatan_id','=','jabatans.id')->where('jabatans.nama_jabatan','LIKE','%Kepala Dinas%')->first();
+                Perintah::where('pegawai_dinas_id',$request->id)->update(['pegawai_dinas_id'=>$getNewAssign->id]);
+                Pengaduan::where('pegawai_dinas_id',$request->id)->update(['pegawai_dinas_id'=>$getNewAssign->id]);
+                $response = [
+                    'status'  => 200,
+                    'message' => 'Data telah diproses.'
+                ];
+
+            }
+            else
+            {
+                $response = [
+                    'status'  => 500,
+                    'message' => 'Data gagal diproses.'
+                ];
+            }
         }
         else
         {
             $response = [
                 'status'  => 500,
-                'message' => 'Data gagal diproses.'
+                'message' => 'Data Kepala dinas tidak boleh kosong.'
             ];
-
         }
 
         return response()->json($response);
