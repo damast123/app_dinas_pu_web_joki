@@ -34,19 +34,18 @@
                             <th>Action</th>
                         </tr>
                     </tfoot>
-                    {{Logger($petawilayah)}}
                     <tbody>
                         @foreach ($petawilayah as $key => $pw)
 
                             <tr>
                                 <td>{{$key+1}}</td>
-                                <td>{{$daerah[$key]->nama_daerah}}</td>
+                                <td>{{$daerah[$key][0]->nama_daerah}}</td>
                                 @if (file_exists(public_path('/petawilayahgambar/'.$pw->gambar)))
                                     <td><a href="{{ url('/petawilayahgambar/'.$pw->gambar) }}"><img style="height: 200px;width: 200px" src="{{ url('/petawilayahgambar/'.$pw->gambar) }}" alt="..." class="d-block img-fluid"></a></td>
                                 @else
                                     <td><img src="https://cdn.bodybigsize.com/wp-content/uploads/2020/03/noimage-15.png" alt="..." class="d-block img-fluid" height="400" width="400"></td>
                                 @endif
-                                <td>{{$dinas[$key]->name}}</td>
+                                <td>{{$dinas[$key][0]->name}}</td>
                                 <td><button onclick="showPetaWilayah('{{$pw->id}}')" class="btn btn-secondary btn-circle">
                                     <i class="fas fa-eye"></i></td>
                             </tr>
@@ -164,6 +163,7 @@
         $('#add_peta_wilayah').modal('show');
         $('#add').show();
         $('#cancel').show();
+        reset();
     }
 
     function reset() {
@@ -190,19 +190,19 @@
             },
             success: function(response) {
                 console.log(response);
-                if(response[0].file!=null)
+                if(response.file!=null)
                 {
-                    $('#download_doc').attr('href', '/admin_pu/peta_wilayah/download/'+response[0].file);
+                    $('#download_doc').attr('href', '/admin_pu/peta_wilayah/download/'+response.file);
                 }
                 else
                 {
                     $('#download_doc').hide();
                 }
 
-                $('#tanngal_dibuat_show').html(response[0].tanggal_dibuat);
-                $('#deskripsi_show').html(response[0].deskripsi);
+                $('#tanngal_dibuat_show').html(response.tanggal_dibuat);
+                $('#deskripsi_show').html(response.deskripsi);
 
-                var link = 'http://'+response[0].link;
+                var link = 'http://'+response.link;
                 $("a[href='http://www.gmail.com/']").attr('href', link);
             },
             error: function() {

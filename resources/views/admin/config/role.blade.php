@@ -75,8 +75,8 @@
                             <input type="text" name="id" id="id" class="form-control" value="" readonly>
                         </div>
                         <div class="form-group">
-                            <label>Nama Jabatan :</label>
-                            <input type="text" name="nama" id="nama" class="form-control" placeholder="Masukkan nama jabatan">
+                            <label>Nama Role :</label>
+                            <input type="text" name="nama" id="nama" class="form-control" placeholder="Masukkan nama role">
                         </div>
 
                     </form>

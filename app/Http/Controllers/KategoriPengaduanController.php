@@ -139,21 +139,4 @@ class KategoriPengaduanController extends Controller
 
         return response()->json($response);
     }
-
-    public function harddeleted(Request $request)
-    {
-        $query = KategoriPengaduan::find($request->id)->forceDelete();
-        if($query) {
-            $response = [
-                'status'  => 200,
-                'message' => 'Data telah diproses.'
-            ];
-        } else {
-            $response = [
-                'status'  => 500,
-                'message' => 'Data gagal diproses.'
-            ];
-        }
-        return response()->json($response);
-    }
 }

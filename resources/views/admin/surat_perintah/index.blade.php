@@ -58,8 +58,8 @@
                         @foreach ($surat_perintah as $key => $sp)
                             <tr>
                                 <td>{{$sp->no_surat_perintah}}</td>
-                                <td>{{$pegawai_dinas_pembuat[$key]->name}}</td>
-                                <td>{{$pegawai_dinas_tujuan[$key]->name}}</td>
+                                <td>{{$pegawai_dinas_pembuat[$key][0]->name}}</td>
+                                <td>{{$pegawai_dinas_tujuan[$key][0]->name}}</td>
                                 @if (file_exists(public_path('/doc_surat_perintah/'.$sp->file)))
                                 <td><a href="/admin_pu/surat_perintah/download/{{$sp->file}}">{{$sp->file}}</a></td>
                                 @else
@@ -112,41 +112,52 @@
 
                 <div class="tabbable">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#tab1" data-toggle="tab">Section 1</a></li>
-                        <li><a href="#tab2" data-toggle="tab">Section 2</a></li>
+                        <li class="active"><a href="#tab1" data-toggle="tab">Detail surat perintah</a></li>
+                        <li><p style="color: white">Ini</p></li>
+                        <li><a href="#tab2" data-toggle="tab">Detail pengaduan</a></li>
                     </ul>
 
                     <div class="tab-content">
                         <div class="tab-pane active" id="tab1">
                             <p class="modal-text">
                                 <label>No Surat Perintah :</label>
-                                <p id="no_surat_perintah"></p>
+                                <span id="no_surat_perintah"></span>
+                                <br>
                                 <label>Tanggal Surat Perintah Keluar:</label>
-                                <p id="tanggal"></p>
+                                <span id="tanggal"></span>
+                                <br>
                                 <label>Lokasi:</label>
-                                <p id="lokasi"></p>
+                                <span id="lokasi"></span>
+                                <br>
                                 <label>Pesan:</label>
-                                <p id="pesan"></p>
+                                <span id="pesan"></span>
+                                <br>
                                 <label>Laporan:</label>
-                                <p id="laporan"></p>
+                                <span id="laporan"></span>
+                                <br>
                                 <label>Status:</label>
-                                <p id="status"></p>
+                                <span id="status"></span>
                             </p>
                         </div>
                         <div class="tab-pane" id="tab2">
                             <p class="modal-text">
                                 <label>Tanggal Kejadian:</label>
-                                <p id="tanggal_kejadian"></p>
+                                <span id="tanggal_kejadian"></span>
+                                <br>
                                 <label>Tanggal Pengaduan:</label>
-                                <p id="tanggal_pengaduan"></p>
+                                <span id="tanggal_pengaduan"></span>
+                                <br>
                                 <label>Judul:</label>
-                                <p id="judul_pengaduan"></p>
+                                <span id="judul_pengaduan"></span>
+                                <br>
                                 <label>Isi Pesan:</label>
-                                <p id="pesan_pengaduan"></p>
+                                <span id="pesan_pengaduan"></span>
+                                <br>
                                 <label>Jenis Pengaduan:</label>
-                                <p id="jenis_pengaduan"></p>
+                                <span id="jenis_pengaduan"></span>
+                                <br>
                                 <label>Nama Pengadu:</label>
-                                <p id="nama_pengadu"></p>
+                                <span id="nama_pengadu"></span>
                             </p>
                         </div>
                     </div>
@@ -173,11 +184,10 @@
                         <ul id="validation_content"></ul>
                     </div>
                     <form id="form_data" enctype="multipart/form-data">
-                        {{ csrf_field() }}
+                        <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                         <div class="form-group">
-                            <input type="text" name="id_edit" id="id_edit" class="form-control" style="display: none">
+                            <input type="text" name="id" id="id_edit" class="form-control" style="display: none" readonly>
                         </div>
-
                         <div class="form-group">
                             <label>No Surat Perintah :</label>
                             <input type="text" name="no_surat_perintah" id="no_surat_perintah_edit" class="form-control" readonly>
@@ -215,6 +225,7 @@
                         <div class="form-group">
                             <label>Status:</label>
                             <select class="form-control" name="status_laporan_edit" id="status_laporan_edit">
+                                <option value="0">Pending</option>
                                 <option value="1">Done</option>
                                 <option value="2">Cancel</option>
                             </select>
@@ -266,8 +277,7 @@
                 </p>
             </div>
             <div class="modal-footer md-button">
-                <button type="button" class="btn btn-warning" id="btn_softdelete" onclick="softdelete()" style="display:none;">Soft Delete</button>
-                <button type="button" class="btn btn-danger" id="btn_delete" onclick="harddelete()" style="display:none;">Delete Pemanent</button>
+                <button type="button" class="btn btn-warning" id="btn_softdelete" onclick="softdelete()" style="display:none;">Delete</button>
             </div>
         </div>
     </div>
@@ -443,7 +453,6 @@
                 $('#no_surat_perintah_delete').val(response.no_surat_perintah);
                 $('#id_delete').val(response.id);
                 $('#btn_softdelete').attr('onclick', 'softdelete(' + id + ')');
-                $('#btn_delete').attr('onclick', 'harddelete(' + id + ')');
             },
             error: function() {
 
@@ -453,30 +462,6 @@
     function softdelete(id) {
         $.ajax({
             url: '{{ url("/admin_pu/surat_perintah/softdelete") }}',
-            type: 'POST',
-            dataType: 'JSON',
-            data: {
-                id: id
-            },
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            success: function(response) {
-                if(response.status == 200) {
-                    deletesuccess();
-                } else {
-                    $('#validation_alert').show();
-                    $('#validation_content').append(`<p>`+response.message+`</p>`);
-                }
-            },
-            error: function() {
-                $('.modal-body').scrollTop(0);
-            }
-        });
-    }
-    function harddelete(id) {
-        $.ajax({
-            url: '{{ url("/admin_pu/surat_perintah/harddelete") }}',
             type: 'POST',
             dataType: 'JSON',
             data: {

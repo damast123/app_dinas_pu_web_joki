@@ -23,10 +23,10 @@ class PerintahController extends Controller
         $dinas_tujuan=[];
         foreach($surat_perintah as $val)
         {
-            $dinas_pembuat = Dinas::select('*')
+            $dinas_pembuat[] = Dinas::select('*')
             ->where('id',$val->pegawai_dinas_pembuat)
             ->get();
-            $dinas_tujuan = Dinas::select('*')
+            $dinas_tujuan[] = Dinas::select('*')
             ->where('id',$val->pegawai_dinas_tujuan)
             ->get();
         }
@@ -77,12 +77,22 @@ class PerintahController extends Controller
             'dinas_tujuan.required' => 'Dinas Tujuan Tidak Boleh Kosong',
 
         ]);
-        $cek_no_surat = Perintah::where('no_surat_perintah',$request->no_surat_perintah)->firstOrFail();
 
-        if($cek_no_surat)
+        $cekData = Perintah::select('*')->where('no_surat_perintah','=',$request->no_surat_perintah)->first();
+
+        if($cekData !== null)
         {
             return back()->with('error', 'Surat perintah sudah ada, silahkan input no surat yang lain.');
         }
+
+        // $cek_no_surat = Perintah::where('no_surat_perintah',$request->no_surat_perintah)->firstOrFail();
+
+        // dd($cek_no_surat);
+
+        // if($cek_no_surat)
+        // {
+        //     return back()->with('error', 'Surat perintah sudah ada, silahkan input no surat yang lain.');
+        // }
 
         $file = $request->file('file_doc');
         $gambar = $request->file('gambar');
@@ -252,22 +262,26 @@ class PerintahController extends Controller
             $getNamaGambar = ['gambar'=>$nama_gambar];
         }
 
-        $arr_merge = array_merge($arr,$getNamaFile,$getNamaGambar,);
+        $arr_merge = array_merge($arr,$getNamaFile,$getNamaGambar);
 
-        $update_perintah = Perintah::findOrFail($request->id_edit)
+        $update_perintah = Perintah::findOrFail($request->id)
             ->update($arr_merge);
 
-        $get_email_pembuat = Dinas::find($request->pegawai_dinas_pembuat);
+        $get_email_pembuat = Dinas::find($request->dinas_pembuat);
 
-        $get_email_tujuan = Dinas::find($request->pegawai_dinas_tujuan);
+        $get_email_tujuan = Dinas::find($request->dinas_tujuan);
 
         if($update_perintah)
         {
-            $get_id_rakyat = Pengaduan::select('*')->where('perintah_id',$request->id_edit)->get();
-            $get_email = Rakyat::find($get_id_rakyat->rakyat_id);
+            $get_id_rakyat = Pengaduan::select('*')->where('perintah_id',$request->id)->get();
 
-            if($request->status_laporan_edit=="1")
+            $get_email = Rakyat::find($get_id_rakyat[0]->rakyat_id);
+
+            if($request->status_laporan_edit=="0")
             {
+                //do nothing
+            }
+            elseif($request->status_laporan_edit=="1"){
                 Pengaduan::where('id',$get_id_rakyat->perintah_id)
                 ->update([
                     'status_pengaduan'      => '2',
@@ -277,6 +291,12 @@ class PerintahController extends Controller
                     'title' => 'Update status pengaduan ',
                     'body' => 'Status pengaduan anda sudah di update. Pengaduan anda sudah selesai diproses.'
                 ];
+
+                try {
+                    Mail::to($get_email->email)->send(new \App\Mail\UpdatePengaduan($detailsPengaduan));
+                } catch(\Exception $e){
+                    echo "Email gagal dikirim karena $e.";
+                }
             }
             else
             {
@@ -289,12 +309,11 @@ class PerintahController extends Controller
                     'title' => 'Update status pengaduan ',
                     'body' => 'Status pengaduan anda sudah di update. Namun mohon maaf tapi pengaduan anda dibatalkan.'
                 ];
-            }
-
-            try {
-                Mail::to($get_email->email)->send(new \App\Mail\UpdatePengaduan($detailsPengaduan));
-            } catch(\Exception $e){
-                echo "Email gagal dikirim karena $e.";
+                try {
+                    Mail::to($get_email->email)->send(new \App\Mail\UpdatePengaduan($detailsPengaduan));
+                } catch(\Exception $e){
+                    echo "Email gagal dikirim karena $e.";
+                }
             }
 
             if($file!=null)
@@ -336,7 +355,7 @@ class PerintahController extends Controller
         {
             $response = [
                 'status'  => 500,
-                'message' => 'Data gagal diproses. '.$update_perintah
+                'message' => 'Data gagal diproses. '
             ];
         }
         return response()->json($response);
@@ -376,23 +395,6 @@ class PerintahController extends Controller
 
         }
 
-        return response()->json($response);
-    }
-
-    public function harddeleted(Request $request)
-    {
-        $query = Perintah::find($request->id)->forceDelete();
-        if($query) {
-            $response = [
-                'status'  => 200,
-                'message' => 'Data telah diproses.'
-            ];
-        } else {
-            $response = [
-                'status'  => 500,
-                'message' => 'Data gagal diproses.'
-            ];
-        }
         return response()->json($response);
     }
 

@@ -40,7 +40,7 @@
                             echo "<tr>";
                             echo "<td>".$no."</td>";
                             echo "<td>".$p['created_at']."</td>";
-                            echo "<td>".$dinas[$key]['name']."</td>";
+                            echo "<td>".$dinas[$key][0]['name']."</td>";
                             echo '<td>
 
                                 <button class="btn btn-info btn-circle" onclick="show('.$id.')">
@@ -90,7 +90,7 @@
                         </div>
                         <div class="form-group">
                             <p>Struktur organisasi :</p>
-                            <img src="" id="preview_gambar">
+                            <img src="" id="preview_gambar" style="width: 100%;height: 100%">
                         </div>
                         <div class="form-group">
                             <label>Fungsi :</label>
@@ -136,7 +136,9 @@
                 }
                 else
                 {
-                    $('#preview_gambar').attr('src', "{{ url('/profile/') }}".response.struktur_organisasi);
+                    console.log(response.struktur_organisasi);
+
+                    $('#preview_gambar').attr('src', "{{ url('/profile') }}"+"/"+response.struktur_organisasi);
                 }
                 $('#fungsi').html(response.fungsi);
                 $('#tugas_pokok').html(response.tugas_pokok);

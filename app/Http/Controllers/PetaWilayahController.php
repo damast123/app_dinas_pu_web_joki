@@ -22,10 +22,10 @@ class PetaWilayahController extends Controller
 
         foreach($petawilayah as $val)
         {
-            $dinas = Dinas::select('*')
+            $dinas[] = Dinas::select('*')
             ->where('id',$val->pegawai_dinas_id)
             ->get();
-            $daerah = Daerah::select('*')
+            $daerah[] = Daerah::select('*')
             ->where('id',$val->daerah_id)
             ->get();
         }
@@ -50,10 +50,10 @@ class PetaWilayahController extends Controller
 
         foreach($petawilayah as $value)
         {
-            $dinas = Dinas::select('*')
+            $dinas[] = Dinas::select('*')
             ->where('id',$value->pegawai_dinas_id)
             ->get();
-            $daerah = Daerah::select('*')
+            $daerah[] = Daerah::select('*')
             ->where('id',$value->daerah_id)
             ->get();
 
@@ -175,7 +175,7 @@ class PetaWilayahController extends Controller
      */
     public function show(Request $request)
     {
-        $petawilayah = PetaWilayah::find($request->id)->get();
+        $petawilayah = PetaWilayah::find($request->id);
 
         // return view('view_peta.show');
         return response()->json($petawilayah);

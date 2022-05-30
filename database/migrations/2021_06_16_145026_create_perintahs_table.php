@@ -23,6 +23,7 @@ class CreatePerintahsTable extends Migration
             $table->text('file')->nullable();
             $table->text('gambar')->nullable();
             $table->tinyInteger('status');
+            $table->softDeletes();;
         });
     }
 

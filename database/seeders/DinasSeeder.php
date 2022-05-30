@@ -66,6 +66,16 @@ class DinasSeeder extends Seeder
                 "jabatan_id" => '5',
                 "role_id" => '4',
             ),
+            array(
+                "name" => "Bazli",
+                "alamat" => "Jalan Imam Bonjol no 25",
+                "email" => "bazli@mail.com",
+                "password" => bcrypt('123456'),
+                "created_at" => Carbon::now(),
+                "updated_at" => Carbon::now(),
+                "jabatan_id" => '8',
+                "role_id" => '2',
+            ),
         );
 
 

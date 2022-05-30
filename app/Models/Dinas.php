@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Dinas extends Authenticable
 {
-    use Notifiable,HasFactory;
+    use Notifiable,HasFactory,SoftDeletes;
 
     protected $table      = 'pegawai_dinas';
     protected $primaryKey = 'id';

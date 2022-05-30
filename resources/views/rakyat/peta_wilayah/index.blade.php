@@ -75,7 +75,7 @@
 
                 <div class="entry-meta">
                   <ul>
-                    <li class="d-flex align-items-center"><i class="bi bi-person"></i> {{$dinas[$key]->name}}</li>
+                    <li class="d-flex align-items-center"><i class="bi bi-person"></i> {{$dinas[$key][0]->name}}</li>
                   </ul>
                 </div>
 

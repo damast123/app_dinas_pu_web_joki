@@ -93,9 +93,10 @@ class ProfileController extends Controller
     {
         $profile = Profile::all();
 
+        $dinas =[];
         foreach($profile as $val)
         {
-            $dinas = Dinas::select('*')
+            $dinas[] = Dinas::select('*')
             ->where('id',$val->pegawai_dinas_id)
             ->get();
 

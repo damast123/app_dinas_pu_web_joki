@@ -103,6 +103,7 @@
         $('#update').show();
         $('#save').hide();
         $('#cancel').show();
+        $("#form_data")[0].reset();
     }
     function reset() {
         $('#form_data').trigger('reset');

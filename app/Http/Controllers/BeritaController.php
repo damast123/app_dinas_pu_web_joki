@@ -43,7 +43,7 @@ class BeritaController extends Controller
 
         foreach($berita as $value)
         {
-            $dinas = Dinas::select('*')
+            $dinas[] = Dinas::select('*')
             ->where('id',$value->pegawai_dinas_id)
             ->get();
         }

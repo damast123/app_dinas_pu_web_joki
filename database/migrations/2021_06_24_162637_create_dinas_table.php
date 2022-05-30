@@ -25,6 +25,7 @@ class CreateDinasTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();;
             $table->bigInteger('jabatan_id')->unsigned();
             $table->bigInteger('role_id')->unsigned();
             $table->foreign('jabatan_id')->references('id')->on('jabatans');

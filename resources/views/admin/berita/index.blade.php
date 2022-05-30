@@ -46,14 +46,14 @@
                             @else
                                 <td><img src="https://cdn.bodybigsize.com/wp-content/uploads/2020/03/noimage-15.png" alt="..." class="d-block img-fluid" height="400" width="400"></td>
                             @endif
-                            <td>{{$dinas[$key]->name}}</td>
+                            <td>{{$dinas[$key][0]->name}}</td>
                             <td>
-                            <button onclick="show('{{$b->id}}','{{$dinas[$key]->name}}')" class="btn btn-secondary btn-circle">
+                            <button onclick="show('{{$b->id}}','{{$dinas[$key][0]->name}}')" class="btn btn-secondary btn-circle">
                                 <i class="fas fa-eye"></i>
                             </button>
                             <a href='{{url("/admin_pu/berita/edit/".$b->id)}}' class="btn btn-primary btn-circle">
                                 <i class="fas fa-edit"></i>
-                            </a> <button onclick="destroy('{{$b->id}}','{{$dinas[$key]->name}}')" class="btn btn-danger btn-circle">
+                            </a> <button onclick="destroy('{{$b->id}}','{{$dinas[$key][0]->name}}')" class="btn btn-danger btn-circle">
                                 <i class="fas fa-trash"></i>
                             </button></td>
                         </tr>

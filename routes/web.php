@@ -42,6 +42,10 @@ Route::get('/admin_pu/dashboard', [HomeAdminDashboard::class,'index'])->name('da
 
 Route::get('/admin_pu/dinas',[DinasController::class,'index']);
 Route::post('admin_pu/dinas/show',[DinasController::class,'show']);
+Route::post('admin_pu/dinas/edit',[DinasController::class,'edit']);
+Route::post('admin_pu/dinas/update',[DinasController::class,'update']);
+Route::post('/admin_pu/dinas/destroy',[DinasController::class,'destroy']);
+Route::post('/admin_pu/dinas/softdelete',[DinasController::class,'deleted']);
 
 Route::get('/admin_pu/gallery',[GalleryController::class,'indexadmin']);
 Route::post('/admin_pu/gallery/store',[GalleryController::class,'store']);
@@ -115,8 +119,6 @@ Route::get('/admin_pu/daerah',[DaerahController::class,'index']);
 Route::post('/admin_pu/daerah/edit',[DaerahController::class,'edit']);
 Route::post('/admin_pu/daerah/update',[DaerahController::class,'update']);
 Route::post('/admin_pu/daerah/store',[DaerahController::class,'store']);
-
-Route::get('/admin_pu/send-mail', [\App\Http\Controllers\SendMailController::class, 'send']);
 
 //masyarakat
 Route::get('/', [ProfileController::class,'index'])->name('dashboard');

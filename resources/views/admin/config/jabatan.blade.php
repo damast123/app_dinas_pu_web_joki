@@ -122,8 +122,7 @@
                 </p>
             </div>
             <div class="modal-footer md-button">
-                <button type="button" class="btn btn-warning" id="btn_softdelete" onclick="softdelete()" style="display:none;">Soft Delete</button>
-                <button type="button" class="btn btn-danger" id="btn_delete" onclick="harddelete()" style="display:none;">Delete Pemanent</button>
+                <button type="button" class="btn btn-warning" id="btn_softdelete" onclick="softdelete()" style="display:none;">Delete</button>
             </div>
         </div>
     </div>
@@ -138,12 +137,14 @@
         $('#update').hide();
         $('#cancel').show();
         $('#cancel').show();
+        reset();
     }
     function toEdit() {
         $('#add_jabatan').modal('show');
         $('#update').show();
         $('#save').hide();
         $('#cancel').show();
+        reset();
     }
     function reset() {
         $('#form_data').trigger('reset');
@@ -287,31 +288,6 @@
     function softdelete(id) {
         $.ajax({
             url: '{{ url("/admin_pu/jabatan/softdelete") }}',
-            type: 'POST',
-            dataType: 'JSON',
-            data: {
-                id: id
-            },
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            success: function(response) {
-                if(response.status == 200) {
-                    deletesuccess();
-                } else {
-                    $('#validation_alert').show();
-                    $('#validation_content').append(`<p>`+response.message+`</p>`);
-                }
-            },
-            error: function() {
-                $('.modal-body').scrollTop(0);
-            }
-        });
-    }
-
-    function harddelete(id) {
-        $.ajax({
-            url: '{{ url("/admin_pu/jabatan/harddelete") }}',
             type: 'POST',
             dataType: 'JSON',
             data: {

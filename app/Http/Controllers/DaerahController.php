@@ -98,7 +98,7 @@ class DaerahController extends Controller
                 return response()->json($response);
             }
             $query = Daerah::where('id', $request->id)->update([
-                'nama_daerah'  => $request->nama_daerah,
+                'nama_daerah'  => $nama_daerah,
             ]);
 
             if($query) {

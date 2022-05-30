@@ -175,6 +175,7 @@
         $('#add_gallery').modal('show');
         $('#save').show();
         $('#cancel').show();
+        reset();
     }
     function reset() {
         $('#form_data').trigger('reset');
