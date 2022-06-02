@@ -30,6 +30,10 @@ class LoginRakyatController extends Controller
 
             return redirect()->intended('/create_pengaduan');
         }
+        else
+        {
+            return back()->with('error', 'Email atau password salah. Silahkan di coba lagi.');
+        }
         return back()->withInput($request->only('email', 'remember'));
     }
 }
