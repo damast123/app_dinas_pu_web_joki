@@ -38,7 +38,7 @@
                             {{ csrf_field() }}
 
                             <div class="form-group">
-                                <label>Nama Event:</label>
+                                <label>Nama Event: <span style="color: red">*</span></label>
                                 <input type="text" name="nama_event" class="form-control">
                                 @if ($errors->has('nama_event'))
                                     <span class="text-danger">{{ $errors->first('nama_event') }}</span>
@@ -46,7 +46,7 @@
                             </div>
 
                             <div class="form-group">
-                                <strong>Tanggal Mulai:</strong>
+                                <strong>Tanggal Mulai: <span style="color: red">*</span></strong>
                                 <input type="date" name="tanggal_mulai" class="form-control">
                                 @if ($errors->has('tanggal_mulai'))
                                     <span class="text-danger">{{ $errors->first('tanggal_mulai') }}</span>
@@ -54,7 +54,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label>Tanggal Akhir:</label>
+                                <label>Tanggal Akhir: <span style="color: red">*</span></label>
                                 <input type="date" name="tanggal_akhir" class="form-control">
                                 @if ($errors->has('tanggal_akhir'))
                                     <span class="text-danger">{{ $errors->first('tanggal_akhir') }}</span>
@@ -62,7 +62,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label>Jam:</label>
+                                <label>Jam: <span style="color: red">*</span></label>
                                 <input type="time" name="jam" class="form-control">
                                 @if ($errors->has('jam'))
                                     <span class="text-danger">{{ $errors->first('jam') }}</span>
@@ -70,7 +70,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label>Isi Event:</label>
+                                <label>Isi Event: <span style="color: red">*</span></label>
                                 <textarea name="isi_event" class="form-control" rows="3"></textarea>
                                 @if ($errors->has('isi_event'))
                                     <span class="text-danger">{{ $errors->first('isi_event') }}</span>
@@ -78,7 +78,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label>Tempat Event:</label>
+                                <label>Tempat Event: <span style="color: red">*</span></label>
                                 <input type="text" name="tempat_event" class="form-control">
                                 @if ($errors->has('tempat_event'))
                                     <span class="text-danger">{{ $errors->first('tempat_event') }}</span>

@@ -121,7 +121,7 @@
                             <input type="hidden" name="id" id="id_edit" class="form-control" value="" readonly>
                         </div>
                         <div class="form-group">
-                            <label>Name :</label>
+                            <label>Nama : <span style="color: red">*</span></label>
                             <input name="name" id="name_edit" class="form-control" placeholder="Masukkan nama" />
                         </div>
                         <div class="form-group">
@@ -137,11 +137,11 @@
                             <input name="tempat_lahir" id="tempat_lahir_edit" class="form-control" placeholder="Masukkan tempat lahir" />
                         </div>
                         <div class="form-group">
-                            <label>No telepon:</label>
+                            <label>No telepon: <span style="color: red">*</span></label>
                             <input name="no_telp" id="no_telp_edit" class="form-control" placeholder="Masukkan nomor telephone" />
                         </div>
                         <div class="form-group">
-                            <label>Email:</label>
+                            <label>Email: <span style="color: red">*</span></label>
                             <input name="email" id="email_edit" class="form-control" placeholder="Masukkan email" />
                         </div>
                         <div class="form-group">

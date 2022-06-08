@@ -91,7 +91,8 @@
                         @endif
 
                         {{ csrf_field() }}
-
+                        <label class="form-check-label" for="pengaduan">Choose one <span style="color: red">*</span></label>
+                        <br>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="jenis_pengaduan" id="pengaduan" value="pengaduan">
                             <label class="form-check-label" for="pengaduan">Pengaduan</label>
@@ -106,7 +107,7 @@
                         @endif
                         <br>
                         <div class="form-group">
-                            <label for="judulPengaduan">Judul Pengaduan</label>
+                            <label for="judulPengaduan">Judul Pengaduan <span style="color: red">*</span></label>
                             <input type="text" class="form-control" id="judulPengaduan" name="judul_pengaduan" placeholder="Masukkan judul pengaduan">
                             @if ($errors->has('judul_pengaduan'))
                                     <span class="text-danger">{{ $errors->first('judul_pengaduan') }}</span>
@@ -114,7 +115,7 @@
                         </div>
                         <br>
                         <div class="form-group">
-                            <label for="idipengaduan">Isi Pengaduan</label>
+                            <label for="idipengaduan">Isi Pengaduan <span style="color: red">*</span></label>
                             <textarea class="form-control" id="isipengaduan" name="isi_pengaduan" rows="5"></textarea>
                             @if ($errors->has('isi_pengaduan'))
                                     <span class="text-danger">{{ $errors->first('isi_pengaduan') }}</span>
@@ -122,7 +123,7 @@
                         </div>
                         <br>
                         <div class="form-group">
-                            <label for="tanggalkejadian">Tanggal Kejadian</label>
+                            <label for="tanggalkejadian">Tanggal Kejadian <span style="color: red">*</span></label>
                             <input type="date" class="form-control" id="tanggalkejadian" name="tanggal_kejadian" aria-describedby="tanggalkejadians">
                             <small id="tanggalkejadians" class="form-text text-muted">Bila tidak tahu maka bisa diisi tanggal sekarang.</small>
                             <br>
@@ -132,7 +133,7 @@
                         </div>
                         <br>
                         <div class="form-group">
-                            <label for="lokasipengaduan">Lokasi</label>
+                            <label for="lokasipengaduan">Lokasi <span style="color: red">*</span></label>
                             <input type="text" class="form-control" id="lokasipengaduan" name="lokasi_pengaduan" placeholder="Masukkan lokasi ">
                             @if ($errors->has('lokasi_pengaduan'))
                                     <span class="text-danger">{{ $errors->first('lokasi_pengaduan') }}</span>
@@ -140,7 +141,7 @@
                         </div>
                         <br>
                         <div class="form-group">
-                            <label for="katpengaduan">Kategori Pengaduan</label>
+                            <label for="katpengaduan">Kategori Pengaduan <span style="color: red">*</span></label>
                             <select class="form-control" id="katpengaduan" name="katpengaduan">
                                 <option value="">--Pilih--</option>
                                 @foreach($katpengaduan as $kp)
@@ -153,7 +154,7 @@
                         </div>
                         <br>
                         <div class="form-group">
-                            <label>Tambah Gambar</label>
+                            <label>Tambah Gambar <span style="color: red">*</span></label>
                             <input type="file" name="gambar" id="gambar">
                             <br>
                             @if ($errors->has('gambar'))

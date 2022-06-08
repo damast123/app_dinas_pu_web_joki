@@ -247,30 +247,6 @@ class BeritaController extends Controller
 	    return response()->json($delete_show);
     }
 
-    public function softdeleted(Request $request)
-    {
-        $query = Berita::find($request->id)->delete();
-        if($query)
-        {
-            $response = [
-                'status'  => 200,
-                'message' => 'Data telah diproses.'
-            ];
-
-        }
-
-        else
-        {
-            $response = [
-                'status'  => 500,
-                'message' => 'Data gagal diproses.'
-            ];
-
-        }
-
-        return response()->json($response);
-    }
-
     public function harddeleted(Request $request)
     {
         $query = Berita::find($request->id)->forceDelete();

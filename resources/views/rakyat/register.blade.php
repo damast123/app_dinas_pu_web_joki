@@ -2,6 +2,13 @@
 <html lang="en">
 
 <head>
+    <style>
+        .required:after{
+            content:'*';
+            color:red;
+            padding-left:5px;
+        }
+    </style>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -53,16 +60,18 @@
                                 @endif
                                 <div class="form-group row">
                                     <div class="col-sm-12">
+                                        <label for="alamat">Nama <span style="color: red">*</span></label>
                                         <input type="text" class="form-control form-control-user" id="name"
                                             placeholder="Nama" name="name">
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <label for="alamat">Alamat</label>
                                     <input type="text" class="form-control form-control-user" id="alamat"
                                         placeholder="Alamat" name="alamat">
                                 </div>
                                 <div class="form-group">
-                                    <label for="jenis_kelamin"></label>
+                                    <label for="jenis_kelamin">Jenis Kelamin</label>
                                     <select class="form-control" id="jenis_kelamin" name="jenis_kelamin">
                                         <option value="" selected>--Pilih Jenis Kelamin--</option>
                                         <option value="L">Laki-Laki</option>
@@ -70,19 +79,23 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
+                                    <label for="no_telp">Nomor Telephone</label>
                                     <input type="text" class="form-control form-control-user" maxlength="14" id="no_telp"
                                         name="no_telp" placeholder="No Telp">
                                 </div>
                                 <div class="form-group">
+                                    <label for="email">Email <span style="color: red">*</span></label>
                                     <input type="email" name="email" class="form-control form-control-user" id="exampleInputEmail"
                                         placeholder="Email Address">
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label for="exampleInputPassword">Password <span style="color: red">*</span></label>
                                         <input type="password" name="password" class="form-control form-control-user"
                                             id="exampleInputPassword" placeholder="Password">
                                     </div>
                                     <div class="col-sm-6">
+                                        <label for="exampleRepeatPassword">Repeat Password <span style="color: red">*</span></label>
                                         <input type="password" name="password_confirmation" class="form-control form-control-user"
                                             id="exampleRepeatPassword" placeholder="Repeat Password">
                                     </div>

@@ -36,6 +36,8 @@ class RegisterController extends Controller
             'email'                 => 'required|email',
             'no_telp'               => 'required',
             'password'              => 'required|confirmed',
+            'jabatan'               => 'required',
+            'role'                  => 'required',
         ];
 
         $messages = [
@@ -46,7 +48,9 @@ class RegisterController extends Controller
             'email.email'           => 'Email tidak valid',
             'no_telp'               => 'Nomor telephone wajib diisi',
             'password.required'     => 'Password wajib diisi',
-            'password.confirmed'    => 'Password tidak sama dengan konfirmasi password'
+            'password.confirmed'    => 'Password tidak sama dengan konfirmasi password',
+            'jabatan.required'      => 'Jabatan wajib diisi',
+            'role.required'         => 'Role wajib diisi'
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);

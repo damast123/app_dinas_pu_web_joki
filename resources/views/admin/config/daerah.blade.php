@@ -55,7 +55,7 @@
     <div class="modal-dialog modal-lg modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Tambah Daerah</h5>
+                <h5 class="modal-title" id="title"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                 </button>
@@ -72,7 +72,7 @@
                             <input type="text" name="id" id="id" class="form-control" value="" readonly>
                         </div>
                         <div class="form-group">
-                            <label>Nama Daerah :</label>
+                            <label>Nama Daerah : <span style="color: red">*</span></label>
                             <input type="text" name="nama_daerah" id="nama_daerah" class="form-control" placeholder="Masukkan nama daerah">
                         </div>
 
@@ -96,6 +96,7 @@
         $('#save').show();
         $('#id_daerah').hide();
         $('#update').hide();
+        $('#title').html("Tambah Daerah");
         $('#cancel').show();
     }
     function toEdit() {
@@ -103,6 +104,7 @@
         $('#update').show();
         $('#save').hide();
         $('#cancel').show();
+        $('#title').html("Edit Daerah");
         $("#form_data")[0].reset();
     }
     function reset() {

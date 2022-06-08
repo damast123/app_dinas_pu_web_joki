@@ -38,7 +38,7 @@
                             {{ csrf_field() }}
 
                             <div class="form-group">
-                                <strong>No Surat Perintah:</strong>
+                                <strong>No Surat Perintah: <span style="color: red">*</span></strong>
                                 <input type="text" name="no_surat_perintah" class="form-control" placeholder="no_surat_perintah">
                                 @if ($errors->has('no_surat_perintah'))
                                     <span class="text-danger">{{ $errors->first('no_surat_perintah') }}</span>
@@ -46,19 +46,19 @@
                             </div>
 
                             <div class="form-group">
-                                <strong>Tanggal Surat Perintah:</strong>
+                                <strong>Tanggal Surat Perintah: <span style="color: red">*</span></strong>
                                 <input type="date" name="tanggal_surat_perintah" class="form-control" >
 
                             </div>
 
                             <div class="form-group">
-                                <strong>Pesan:</strong>
+                                <strong>Pesan: <span style="color: red">*</span></strong>
                                 <textarea name="pesan" id="pesan" class="form-control" rows="3" placeholder="Pesan"></textarea>
 
                             </div>
 
                             <div class="form-group">
-                                <label>Lokasi:</label>
+                                <label>Lokasi: <span style="color: red">*</span></label>
                                 <input type="text" name="lokasi" class="form-control" placeholder="Lokasi">
 
                             </div>
@@ -83,7 +83,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="dinas_tujuan">Pegawai Dinas Tujuan</label>
+                                <label for="dinas_tujuan">Pegawai Dinas Tujuan <span style="color: red">*</span></label>
                                 <select class="form-control" id="dinas_tujuan" name="dinas_tujuan">
                                     <option value="">--Pilih--</option>
                                     @foreach($dinas as $d)
@@ -93,7 +93,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="pengaduan_assign">Pengaduan</label>
+                                <label for="pengaduan_assign">Pengaduan <span style="color: red">*</span></label>
                                 <select class="form-control" id="pengaduan_assign" name="pengaduan_assign">
                                     <option value="">--Pilih--</option>
                                     @foreach($pengaduan as $p)
@@ -103,7 +103,7 @@
                             </div>
 
                             <div class="form-group">
-                                <strong>Status:</strong>
+                                <strong>Status: <span style="color: red">*</span></strong>
                                 <Select class="form-control" name="status_laporan">
                                     <option value="0">Pending</option>
                                     <option value="1">Done</option>

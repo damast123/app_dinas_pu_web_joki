@@ -123,8 +123,7 @@
                     <p>Are you sure want to delete this?</p>
                     <form id="form_data">
                         <div class="form-group">
-                            <label>Id :</label>
-                            <input type="text" name="id" id="id_delete" class="form-control" readonly>
+                            <input type="hidden" name="id" id="id_delete" class="form-control" readonly>
                         </div>
                         <div class="form-group">
                             <label>Judul berita:</label>
@@ -138,8 +137,7 @@
                 </p>
             </div>
             <div class="modal-footer md-button">
-                <button type="button" class="btn btn-warning" id="btn_softdelete" onclick="softdelete()" style="display:none;">Soft Delete</button>
-                <button type="button" class="btn btn-danger" id="btn_delete" onclick="harddelete()" style="display:none;">Delete Pemanent</button>
+                <button type="button" class="btn btn-danger" id="btn_delete" onclick="harddelete()" style="display:none;">Delete</button>
             </div>
         </div>
     </div>

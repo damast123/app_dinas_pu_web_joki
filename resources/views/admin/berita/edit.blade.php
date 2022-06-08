@@ -41,7 +41,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="font-weight-bold">Tanggal Berita</label>
+                                <label class="font-weight-bold">Tanggal Berita <span style="color: red">*</span></label>
                                 <input type="date" class="form-control" name="tanggal_berita" value="{{$berita->tanggal_berita}}">
                                 @if ($errors->has('tanggal_berita'))
                                     <span class="text-danger">{{ $errors->first('tanggal_berita') }}</span>
@@ -49,7 +49,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="font-weight-bold">Tanggal Muat</label>
+                                <label class="font-weight-bold">Tanggal Muat <span style="color: red">*</span></label>
                                 <input type="date" class="form-control" name="tanggal_muat" value="{{$berita->tanggal_muat}}">
                                 @if ($errors->has('tanggal_muat'))
                                     <span class="text-danger">{{ $errors->first('tanggal_muat') }}</span>
@@ -57,7 +57,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="font-weight-bold">Judul Berita</label>
+                                <label class="font-weight-bold">Judul Berita <span style="color: red">*</span></label>
                                 <input type="text" class="form-control" name="judul_berita" value="{!! $berita['judul_berita'] !!}">
                                 @if ($errors->has('judul_berita'))
                                     <span class="text-danger">{{ $errors->first('judul_berita') }}</span>
@@ -65,7 +65,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="font-weight-bold">Isi Berita</label>
+                                <label class="font-weight-bold">Isi Berita <span style="color: red">*</span></label>
                                 <textarea class="form-control" name="isi_berita" rows="5" placeholder="Masukkan Isi Berita">{!! $berita['isi_berita'] !!}</textarea>
                                 @if ($errors->has('isi_berita'))
                                     <span class="text-danger">{{ $errors->first('isi_berita') }}</span>
