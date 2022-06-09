@@ -141,7 +141,6 @@ class PerintahController extends Controller
             try {
                 Mail::to($emailDinasTujuan[0]['email'])->send(new \App\Mail\MyMail($details));
             } catch(\Exception $e){
-                echo "Email gagal dikirim karena $e.";
             }
 
             $get_id_rakyat = Pengaduan::find($request->pengaduan_assign);
@@ -156,7 +155,6 @@ class PerintahController extends Controller
             try {
                 Mail::to($get_email->email)->send(new \App\Mail\UpdatePengaduan($detailsPengaduan));
             } catch(\Exception $e){
-                echo "Email gagal dikirim karena $e.";
             }
 
 
@@ -242,6 +240,7 @@ class PerintahController extends Controller
      */
     public function update(Request $request)
     {
+
         $id = Auth::guard('admin')->user()->id;
         $arr = ['pesan'      => $request->pesan,
         'laporan'      => $request->laporan,
@@ -273,16 +272,35 @@ class PerintahController extends Controller
 
         if($update_perintah)
         {
-            $get_id_rakyat = Pengaduan::select('*')->where('perintah_id',$request->id)->get();
+            $get_id_rakyat = Pengaduan::where('perintah_id','=',$request->id)->get();
 
             $get_email = Rakyat::find($get_id_rakyat[0]->rakyat_id);
 
+            $details = [
+                'title' => 'Update perintah ',
+                'body' => 'Perintah dengan no surat: '.$request->no_surat_perintah.' sudah di update. Silahkan cek di web.'
+            ];
+
             if($request->status_laporan_edit=="0")
             {
-                //do nothing
+                if($id==$get_email_pembuat->id)
+                {
+                    try {
+                        Mail::to($get_email_tujuan->email)->send(new \App\Mail\MyMailUpdate($details));
+                    } catch(\Exception $e){
+
+                    }
+                }
+                else
+                {
+                    try {
+                        Mail::to($get_email_pembuat->email)->send(new \App\Mail\MyMailUpdate($details));
+                    } catch(\Exception $e){
+                    }
+                }
             }
             elseif($request->status_laporan_edit=="1"){
-                Pengaduan::where('id',$get_id_rakyat->perintah_id)
+                Pengaduan::where('perintah_id','=',$request->id)
                 ->update([
                     'status_pengaduan'      => '2',
                 ]);
@@ -295,12 +313,11 @@ class PerintahController extends Controller
                 try {
                     Mail::to($get_email->email)->send(new \App\Mail\UpdatePengaduan($detailsPengaduan));
                 } catch(\Exception $e){
-                    echo "Email gagal dikirim karena $e.";
                 }
             }
             else
             {
-                Pengaduan::where('id',$get_id_rakyat->perintah_id)
+                Pengaduan::where('perintah_id','=',$request->id)
                 ->update([
                     'status_pengaduan'      => '3',
                 ]);
@@ -312,7 +329,6 @@ class PerintahController extends Controller
                 try {
                     Mail::to($get_email->email)->send(new \App\Mail\UpdatePengaduan($detailsPengaduan));
                 } catch(\Exception $e){
-                    echo "Email gagal dikirim karena $e.";
                 }
             }
 
@@ -326,26 +342,7 @@ class PerintahController extends Controller
                 $tujuan_gambar = 'gambar_surat_perintah';
 		        $gambar->move($tujuan_gambar,$nama_gambar);
             }
-            $details = [
-                'title' => 'Update perintah ',
-                'body' => 'Perintah dengan no surat: '.$request->no_surat_perintah.' sudah di update. Silahkan cek di web.'
-            ];
-            if($id==$get_email_pembuat->id)
-            {
-                try {
-                    Mail::to($get_email_tujuan->email)->send(new \App\Mail\MyMailUpdate($details));
-                } catch(\Exception $e){
-                    echo "Email gagal dikirim karena $e.";
-                }
-            }
-            else
-            {
-                try {
-                    Mail::to($get_email_pembuat->email)->send(new \App\Mail\MyMailUpdate($details));
-                } catch(\Exception $e){
-                    echo "Email gagal dikirim karena $e.";
-                }
-            }
+
             $response = [
                 'status'  => 200,
                 'message' => 'Data telah diproses.'

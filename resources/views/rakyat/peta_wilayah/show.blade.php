@@ -88,14 +88,15 @@
                             {!! $petawilayah->deskripsi !!}
                         </p>
                         <p>
-                            link untuk download dokumentasi <a href="/admin_pu/peta_wilayah/download/{{$petawilayah->file}}">pdf</a>
+                            @if (file_exists(public_path('/peta_wilayah/'.$petawilayah->file)))
+                                link untuk download dokumentasi <a href="/admin_pu/peta_wilayah/download/{{$petawilayah->file}}">pdf</a>
+                            @else
+                                <p>No File</p>
+                            @endif
+
                         </p>
                         <p>
-                            @if (substr($petawilayah->file, 0, 7) == "http://" || substr($petawilayah->file, 0, 8) == "https://")
-                                link untuk melihat peta wilayah di <a href=" {{$petawilayah->link}}">google earth</a>
-                            @else
-                                link untuk melihat peta wilayah di lah kok? <a href=" https://{{$petawilayah->link}}">google earth</a>
-                            @endif
+                            link untuk melihat peta wilayah di <a href=" {{$petawilayah->link}}">google earth</a>
                         </p>
                     </div>
 

@@ -140,7 +140,6 @@ class PengaduanController extends Controller
                 Mail::to($emailDinasTujuan->email)->send(new \App\Mail\RakyatMail($details));
                 echo "sukses";
             } catch(\Exception $e){
-                echo "Email gagal dikirim karena $e.";
             }
 
             if($gambar!=null)
@@ -223,7 +222,6 @@ class PengaduanController extends Controller
             try {
                 Mail::to($get_email->email)->send(new \App\Mail\UpdatePengaduan($details));
             } catch(\Exception $e){
-                echo "Email gagal dikirim karena $e.";
             }
 
             $response = [

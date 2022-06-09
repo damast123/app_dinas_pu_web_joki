@@ -76,6 +76,8 @@
                 <div class="entry-meta">
                   <ul>
                     <li class="d-flex align-items-center"><i class="bi bi-person"></i> {{$dinas[$key][0]->name}}</li>
+                    <li class="d-flex align-items-center"><i class="bi bi-clock"></i>{{$pw->tanggal_dibuat}}</li>
+                    <li class="d-flex align-items-center"><i class="bi bi-map"></i>{{$daerah[$key][0]->nama_daerah}}</li>
                   </ul>
                 </div>
 

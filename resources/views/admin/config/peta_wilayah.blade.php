@@ -163,7 +163,7 @@
         $('#add_peta_wilayah').modal('show');
         $('#add').show();
         $('#cancel').show();
-        reset();
+
     }
 
     function reset() {
@@ -201,8 +201,8 @@
 
                 $('#tanngal_dibuat_show').html(response.tanggal_dibuat);
                 $('#deskripsi_show').html(response.deskripsi);
+                var link = response.link;
 
-                var link = 'http://'+response.link;
                 $("a[href='http://www.gmail.com/']").attr('href', link);
             },
             error: function() {
